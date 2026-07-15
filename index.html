@@ -4,12 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no" />
   <meta name="theme-color" content="#050806" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>BIGOLE Knockout Cup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -17,75 +18,22 @@
     <div class="rotate-card">
       <div class="rotate-icon">↻</div>
       <h1>Rotate your phone</h1>
-      <p>The full finals bracket is designed for landscape.</p>
+      <p>The complete finals bracket fits on one landscape screen.</p>
       <button id="landscapeButton" type="button">Open landscape</button>
     </div>
   </section>
 
-  <div id="viewport">
-    <main id="stage" aria-label="BIGOLE Knockout Cup finals bracket">
+  <div class="viewport-stage" id="viewportStage">
+    <main class="design-canvas" id="designCanvas">
       <header class="topbar">
-        <div class="brand"><span class="trophy">🏆</span><strong>BIGOLE KNOCKOUT CUP</strong></div>
-        <h1>ROAD TO THE TITLE</h1>
+        <div class="brand"><span>🏆</span><strong>BIGOLE KNOCKOUT CUP</strong></div>
+        <div class="title">Road to the title</div>
         <div class="status"><b id="roundBadge">ROUND —</b><em id="feedState">LOADING</em></div>
       </header>
-
-      <div class="round-head r1"><strong>WEEK 1</strong><span>LEAGUE POINTS SHOWN</span></div>
-      <div class="round-head r2"><strong>WEEK 2</strong><span>ROUND SCORE</span></div>
-      <div class="round-head r3"><strong>WEEK 3</strong><span>ROUND SCORE</span></div>
-      <div class="round-head r4"><strong>WEEK 4</strong><span>ROUND SCORE</span></div>
-      <div class="round-head champ"><strong>CHAMPION</strong></div>
-
-      <svg class="routes" viewBox="0 0 1792 832" aria-hidden="true">
-        <defs>
-          <filter id="glow"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#a8ed37"/></marker>
-        </defs>
-        <!-- Week 1 qualifying winners bypass Week 2 -->
-        <path class="route route-win" d="M462 203 H940 V273" marker-end="url(#arrow)"/>
-        <path class="route route-win" d="M462 688 H900 V572" marker-end="url(#arrow)"/>
-
-        <!-- Week 1 qualifying losers drop into Week 2 -->
-        <path class="route route-drop" d="M462 253 H520 V295 H560" marker-end="url(#arrow)"/>
-        <path class="route route-drop" d="M462 738 H520 V615 H560" marker-end="url(#arrow)"/>
-
-        <!-- Week 1 elimination winners enter Week 2 -->
-        <path class="route route-win" d="M462 373 H520 V345 H560" marker-end="url(#arrow)"/>
-        <path class="route route-win" d="M462 538 H520 V565 H560" marker-end="url(#arrow)"/>
-
-        <!-- Week 2 winners cross over into opposite preliminary finals -->
-        <path class="route route-win crossover" d="M840 320 H875 V565 H905" marker-end="url(#arrow)"/>
-        <path class="route route-win crossover" d="M840 590 H875 V325 H905" marker-end="url(#arrow)"/>
-
-        <!-- Preliminary winners to Grand Final -->
-        <path class="route route-win" d="M1185 300 H1218 V390 H1245" marker-end="url(#arrow)"/>
-        <path class="route route-win" d="M1185 565 H1218 V445 H1245" marker-end="url(#arrow)"/>
-
-        <!-- Grand Final winner to champion -->
-        <path class="route route-win" d="M1518 418 H1560" marker-end="url(#arrow)"/>
-
-        <g class="route-node"><circle cx="520" cy="295" r="10"/><text x="520" y="299">↘</text></g>
-        <g class="route-node"><circle cx="520" cy="345" r="10"/><text x="520" y="349">→</text></g>
-        <g class="route-node"><circle cx="520" cy="565" r="10"/><text x="520" y="569">→</text></g>
-        <g class="route-node"><circle cx="520" cy="615" r="10"/><text x="520" y="619">↗</text></g>
-      </svg>
-
-      <section id="cards"></section>
-
-      <aside class="champion-card">
-        <div class="champion-icon">🏆</div>
-        <strong>CHAMPION</strong>
-        <span id="championName">TBD</span>
-      </aside>
-
-      <footer class="legend">
-        <span><i class="win"></i>Winner advances</span>
-        <span><i class="drop"></i>Top-four loser drops to Week 2</span>
-        <span><i class="out"></i>Bottom-four loser eliminated</span>
-        <span class="updated" id="updatedAt">Waiting for data</span>
-      </footer>
+      <section class="bracket" id="bracket" aria-label="Top eight four-week knockout bracket"></section>
     </main>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
