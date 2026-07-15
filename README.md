@@ -1,11 +1,8 @@
 # BIGOLE Knockout Cup
 
-Exact compact SuperCoach-style four-week finals map.
+One-screen, landscape-only Top 8 finals map using fixed SVG coordinates so the bracket geometry cannot drift across devices.
 
-- One landscape screen.
-- No scrolling.
-- Week 1 shows ladder points beside team names.
-- Later rounds show round scores.
-- Top-four winners visibly bypass Week 2.
 - Tim is excluded before seeding.
-- Data refreshes from `data/live.json` every 60 seconds.
+- Week 1 shows league points.
+- Later rounds read round scores from `data/live.json`.
+- The site refreshes the data every 60 seconds.
