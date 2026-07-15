@@ -1,54 +1,78 @@
 const competition = {
   excludedCoach: 'Tim',
-  roundsLeft: 3,
-  updatedAt: new Date().toISOString(),
   standings: [
-    { originalRank: 1, team: 'Cooma Stallions', coach: 'Tim', points: 34, scored: 24554 },
-    { originalRank: 2, team: 'BIGOLE', coach: 'Joel', points: 30, scored: 25105 },
-    { originalRank: 3, team: "Multch’s Magoo’s", coach: 'Mitch', points: 28, scored: 24658 },
-    { originalRank: 4, team: 'Ballbags', coach: 'Hayden', points: 28, scored: 24035 },
-    { originalRank: 5, team: 'The amateurs', coach: 'Jhai', points: 26, scored: 24262 },
-    { originalRank: 6, team: 'I love Herbie', coach: 'Blake', points: 26, scored: 23476 },
-    { originalRank: 7, team: 'Bonogin Brawlers', coach: 'Matt', points: 24, scored: 23332 },
-    { originalRank: 8, team: 'BARRY', coach: 'Kyle', points: 22, scored: 23788 },
-    { originalRank: 9, team: 'Bridgette', coach: 'Bridgette', points: 20, scored: 23046 },
-    { originalRank: 10, team: '#Phinsup', coach: 'Aidan', points: 20, scored: 22293 },
-    { originalRank: 11, team: 'Kini_mo’s', coach: 'Ryan', points: 18, scored: 22971 },
-    { originalRank: 12, team: 'Brisbane Lions', coach: 'Ivan', points: 18, scored: 21150 },
-    { originalRank: 13, team: 'Jade on top', coach: 'JD', points: 14, scored: 21872 },
-    { originalRank: 14, team: "Walsh’s plumbing", coach: 'brendan', points: 14, scored: 19727 },
-    { originalRank: 15, team: 'Superstars', coach: 'Rayna', points: 10, scored: 20256 },
-    { originalRank: 16, team: 'Heavy Hitters', coach: 'Reece', points: 6, scored: 18097 },
-    { originalRank: 17, team: 'Turbzz', coach: 'Nicholas', points: 4, scored: 15037 },
-    { originalRank: 18, team: 'Beeteezeelz', coach: 'Brett', points: 0, scored: 14819 }
+    { team: 'Cooma Stallions', coach: 'Tim', points: 34, scored: 24554 },
+    { team: 'BIGOLE', coach: 'Joel', points: 30, scored: 25105 },
+    { team: "Multch’s Magoo’s", coach: 'Mitch', points: 28, scored: 24658 },
+    { team: 'Ballbags', coach: 'Hayden', points: 28, scored: 24035 },
+    { team: 'The amateurs', coach: 'Jhai', points: 26, scored: 24262 },
+    { team: 'I love Herbie', coach: 'Blake', points: 26, scored: 23476 },
+    { team: 'Bonogin Brawlers', coach: 'Matt', points: 24, scored: 23332 },
+    { team: 'BARRY', coach: 'Kyle', points: 22, scored: 23788 },
+    { team: 'Bridgette', coach: 'Bridgette', points: 20, scored: 23046 }
   ]
 };
 
 function getSeeds() {
   return competition.standings
-    .filter(x => x.coach.toLowerCase() !== competition.excludedCoach.toLowerCase())
-    .sort((a,b) => b.points-a.points || b.scored-a.scored)
-    .slice(0,8)
-    .map((x,i) => ({...x, seed:i+1}));
+    .filter(entry => entry.coach.toLowerCase() !== competition.excludedCoach.toLowerCase())
+    .sort((a, b) => b.points - a.points || b.scored - a.scored)
+    .slice(0, 8)
+    .map((entry, index) => ({ ...entry, seed: index + 1 }));
 }
 
-function teamRow(team, score='—', leading=false) {
-  if (!team) return `<div class="team"><div class="rank">–</div><div><div class="team-name pending">TBD</div><div class="coach">Waiting for result</div></div><div class="score pending">—</div></div>`;
-  return `<div class="team ${leading?'leading':''}"><div class="rank">${team.seed ?? '–'}</div><div><div class="team-name">${team.team}</div><div class="coach">${team.coach}</div></div><div class="score">${score}</div></div>`;
+function teamRow(team) {
+  if (!team) {
+    return `<div class="team"><div class="rank">–</div><div><div class="team-name pending">TBD</div><div class="coach">Waiting for result</div></div><div class="score pending">—</div></div>`;
+  }
+  return `<div class="team current"><div class="rank">${team.seed}</div><div><div class="team-name">${team.team}</div><div class="coach">${team.coach}</div></div><div class="score">—</div></div>`;
 }
-function match(label,a,b){return `<div class="match"><div class="match-label">${label}</div>${teamRow(a)}${teamRow(b)}</div>`}
 
-function render(){
-  const seeds=getSeeds();
-  document.getElementById('roundsLeft').textContent=competition.roundsLeft;
-  document.getElementById('updatedAt').textContent=`Updated ${new Date(competition.updatedAt).toLocaleString([], {hour:'2-digit',minute:'2-digit'})}`;
-  document.getElementById('seedList').innerHTML=seeds.map(t=>`<div class="seed"><div class="seed-num">${t.seed}</div><div><div class="seed-name">${t.team}</div><div class="seed-coach">${t.coach} · ${t.points} pts</div></div></div>`).join('');
-
-  const [s1,s2,s3,s4,s5,s6,s7,s8]=seeds;
-  document.getElementById('bracket').innerHTML=`
-    <div class="round"><div class="round-title">Week 1</div>${match('Qualifying final 1',s1,s4)}${match('Elimination final 1',s5,s8)}${match('Elimination final 2',s6,s7)}${match('Qualifying final 2',s2,s3)}</div>
-    <div class="round"><div class="round-title">Week 2</div>${match('Semi final 1',null,null)}${match('Semi final 2',null,null)}</div>
-    <div class="round"><div class="round-title">Week 3</div>${match('Preliminary final 1',null,null)}${match('Preliminary final 2',null,null)}</div>
-    <div class="round"><div class="round-title">Week 4</div>${match('Grand final',null,null)}</div>`;
+function match({ className, label, type = 'future', badge = '', a = null, b = null, note = '' }) {
+  return `<article class="match ${className}" data-type="${type}">
+    <div class="match-label"><span>${label}</span>${badge ? `<span class="chance ${badge === 'Double chance' ? 'safe' : 'danger'}">${badge}</span>` : ''}</div>
+    ${teamRow(a)}${teamRow(b)}${note ? `<span class="path-note" title="${note}">→</span>` : ''}
+  </article>`;
 }
+
+function render() {
+  const [s1, s2, s3, s4, s5, s6, s7, s8] = getSeeds();
+  document.getElementById('bracket').innerHTML = `
+    <section class="round w1">
+      <div class="round-title">Week 1</div>
+      ${match({ className:'m1', label:'Qualifying Final 1', type:'qualifying', badge:'Double chance', a:s1, b:s4, note:'Winner to preliminary final; loser to semi final' })}
+      ${match({ className:'m2', label:'Elimination Final 1', type:'elimination', badge:'Lose = out', a:s5, b:s8, note:'Winner to semi final' })}
+      ${match({ className:'m3', label:'Elimination Final 2', type:'elimination', badge:'Lose = out', a:s6, b:s7, note:'Winner to semi final' })}
+      ${match({ className:'m4', label:'Qualifying Final 2', type:'qualifying', badge:'Double chance', a:s2, b:s3, note:'Winner to preliminary final; loser to semi final' })}
+    </section>
+    <section class="round w2">
+      <div class="round-title">Week 2</div>
+      ${match({ className:'m1', label:'Semi Final 1', a:null, b:null, note:'Winner to preliminary final' })}
+      ${match({ className:'m2', label:'Semi Final 2', a:null, b:null, note:'Winner to preliminary final' })}
+    </section>
+    <section class="round w3">
+      <div class="round-title">Week 3</div>
+      ${match({ className:'m1', label:'Preliminary Final 1', a:null, b:null, note:'Winner to grand final' })}
+      ${match({ className:'m2', label:'Preliminary Final 2', a:null, b:null, note:'Winner to grand final' })}
+    </section>
+    <section class="round w4">
+      <div class="round-title">Week 4</div>
+      ${match({ className:'m1', label:'Grand Final', a:null, b:null })}
+    </section>`;
+}
+
+async function requestLandscape() {
+  try {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+      await document.documentElement.requestFullscreen();
+    }
+    if (screen.orientation?.lock) {
+      await screen.orientation.lock('landscape');
+    }
+  } catch {
+    // iPhone Safari may reject orientation locking; portrait remains blocked by CSS.
+  }
+}
+
+document.getElementById('landscapeButton')?.addEventListener('click', requestLandscape);
 render();

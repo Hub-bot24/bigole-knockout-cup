@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#101411" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="theme-color" content="#080b09" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>BIGOLE Knockout Cup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,66 +14,54 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="noise"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="rotate-gate" id="rotateGate">
+    <div class="rotate-card">
+      <div class="phone-icon" aria-hidden="true">↻</div>
+      <div class="eyebrow">LANDSCAPE REQUIRED</div>
+      <h1>Rotate your phone</h1>
+      <p>The full finals pathway is designed to fill the screen in landscape.</p>
+      <button id="landscapeButton" type="button">Open in landscape</button>
+    </div>
+  </div>
+
   <main class="shell">
-    <header class="hero">
-      <div class="eyebrow">HOT & BLACK PRIVATE FINALS</div>
-      <div class="hero-row">
-        <div>
-          <h1>BIGOLE<br><span>Knockout Cup</span></h1>
-          <p>Top 8. Four rounds. One champion.</p>
-        </div>
-        <div class="cup-mark" aria-label="Cup logo">HB</div>
-      </div>
-      <div class="hero-meta">
-        <div><span>Live status</span><strong id="liveStatus">Snapshot loaded</strong></div>
-        <div><span>Regular rounds left</span><strong id="roundsLeft">3</strong></div>
-        <div><span>Excluded</span><strong>Tim</strong></div>
-      </div>
-    </header>
-
-    <section class="rule-strip">
-      <div class="pulse"></div>
-      <span>Tim is removed before seeding. All remaining teams move up one position.</span>
-    </section>
-
-    <section class="ladder-card">
-      <div class="section-heading">
-        <div>
-          <div class="eyebrow">CURRENT QUALIFIERS</div>
-          <h2>Live seedings</h2>
-        </div>
-        <div class="updated" id="updatedAt">Updated now</div>
-      </div>
-      <div id="seedList" class="seed-list"></div>
-    </section>
-
     <section class="bracket-card">
-      <div class="section-heading">
+      <header class="section-heading">
         <div>
-          <div class="eyebrow">FINALS SERIES</div>
-          <h2>Road to the title</h2>
+          <div class="eyebrow">FINALS SERIES · TOP 8 · 4 WEEKS</div>
+          <h1>Road to the title</h1>
         </div>
-        <div class="legend"><span></span> Current leader</div>
+        <div class="legend" aria-label="Bracket legend">
+          <span><i class="dot live"></i> Current seed</span>
+          <span><i class="dot safe"></i> Double chance</span>
+          <span><i class="dot danger"></i> Lose and out</span>
+        </div>
+      </header>
+
+      <div class="rule-strip">
+        <div><strong>Week 1</strong><span>1–4 have a double chance. 5–8 are elimination matches.</span></div>
+        <div><strong>Week 2</strong><span>Qualifying losers face elimination winners.</span></div>
+        <div><strong>Week 3</strong><span>Qualifying winners return for the preliminary finals.</span></div>
+        <div><strong>Week 4</strong><span>Preliminary winners play for the cup.</span></div>
       </div>
 
-      <div class="bracket-scroll">
-        <div class="bracket" id="bracket"></div>
-      </div>
+      <div class="bracket" id="bracket" aria-label="Four-week finals bracket"></div>
     </section>
 
-    <section class="champion-card">
+    <section class="champion-card" id="championCard">
       <div>
         <div class="eyebrow">GRAND FINAL</div>
         <h2>Champion waiting</h2>
-        <p>The final winner will light up this card when the four-week series is complete.</p>
+        <p>The winner of Week 4 will light up this card.</p>
       </div>
-      <div class="trophy">🏆</div>
+      <div class="trophy" aria-hidden="true">🏆</div>
     </section>
 
     <footer>
       <span>BIGOLE Knockout Cup</span>
-      <span id="seasonLabel">Season auto-detected when live feed is connected</span>
+      <span>Tim excluded before seeding · ladder automatically re-seeded</span>
     </footer>
   </main>
 
