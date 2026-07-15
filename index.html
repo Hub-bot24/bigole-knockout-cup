@@ -15,7 +15,6 @@
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
-
   <div class="rotate-gate" id="rotateGate">
     <div class="rotate-card">
       <div class="phone-icon" aria-hidden="true">↻</div>
@@ -33,17 +32,16 @@
           <div class="eyebrow">FINALS SERIES · TOP 8 · 4 WEEKS</div>
           <h1>Road to the title</h1>
         </div>
-        <div class="legend" aria-label="Bracket legend">
-          <span><i class="dot live"></i> Current seed</span>
-          <span><i class="dot safe"></i> Double chance</span>
-          <span><i class="dot danger"></i> Lose and out</span>
+        <div class="live-meta">
+          <span class="feed-state" id="feedState">Loading data…</span>
+          <span class="updated" id="updatedAt"></span>
         </div>
       </header>
 
       <div class="rule-strip">
-        <div><strong>Week 1</strong><span>1–4 have a double chance. 5–8 are elimination matches.</span></div>
+        <div><strong>Week 1</strong><span>1–4 double chance. 5–8 lose and they are out.</span></div>
         <div><strong>Week 2</strong><span>Qualifying losers face elimination winners.</span></div>
-        <div><strong>Week 3</strong><span>Qualifying winners return for the preliminary finals.</span></div>
+        <div><strong>Week 3</strong><span>Qualifying winners enter the preliminary finals.</span></div>
         <div><strong>Week 4</strong><span>Preliminary winners play for the cup.</span></div>
       </div>
 
@@ -53,18 +51,17 @@
     <section class="champion-card" id="championCard">
       <div>
         <div class="eyebrow">GRAND FINAL</div>
-        <h2>Champion waiting</h2>
-        <p>The winner of Week 4 will light up this card.</p>
+        <h2 id="championName">Champion waiting</h2>
+        <p id="championText">The winner of Week 4 will light up this card.</p>
       </div>
       <div class="trophy" aria-hidden="true">🏆</div>
     </section>
 
     <footer>
       <span>BIGOLE Knockout Cup</span>
-      <span>Tim excluded before seeding · ladder automatically re-seeded</span>
+      <span>Tim excluded before seeding · ladder re-seeded automatically</span>
     </footer>
   </main>
-
   <script src="app.js"></script>
 </body>
 </html>

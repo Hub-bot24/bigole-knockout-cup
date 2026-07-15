@@ -1,9 +1,13 @@
 # BIGOLE Knockout Cup
 
-Standalone, landscape-first Top 8 finals bracket.
+Standalone one-page landscape finals bracket.
 
-- Tim excluded before seeding
-- Current ladder is re-seeded automatically
-- Full four-week pathway explained on the bracket
-- Portrait phones are blocked with a rotate prompt
-- No connection to the SuperCoach War Room repository
+## Data contract
+
+The app polls `data/live.json` every 60 seconds.
+
+- During `phase: regular`, each card shows league points and teams are re-seeded after excluding Tim.
+- During `phase: finals`, each card shows the current round score.
+- `finals.matches` controls each matchup, status and winner.
+
+The repository contains a manual snapshot only. A verified SuperCoach importer or GitHub Action must update `data/live.json` for true live operation.

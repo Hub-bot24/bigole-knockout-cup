@@ -59,3 +59,17 @@ footer{display:flex;justify-content:space-between;color:#667169;font-size:10px;p
   body{overflow:hidden}.shell{visibility:hidden;height:100vh;overflow:hidden}.rotate-gate{position:fixed;z-index:9999;inset:0;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 30%,rgba(155,221,45,.16),transparent 34%),var(--bg)}.rotate-card{width:min(430px,100%);text-align:center;border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,#151d18,#0f1511);padding:32px 24px;box-shadow:var(--shadow)}.phone-icon{font-size:64px;line-height:1;color:var(--green);margin-bottom:14px;transform:rotate(-90deg)}.rotate-card h1{font-size:34px;margin:9px 0 12px}.rotate-card p{color:var(--muted);line-height:1.5;margin:0 auto 20px;max-width:320px}.rotate-card button{appearance:none;border:0;border-radius:14px;background:var(--green);color:#0b100c;font:800 15px Inter,sans-serif;padding:14px 18px;cursor:pointer;box-shadow:0 10px 26px rgba(155,221,45,.22)}
 }
 @media (display-mode:standalone) and (orientation:landscape){body{overscroll-behavior:none}}
+
+.live-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:11px;color:#9aa69d}
+.feed-state{font-weight:800;color:#9bdd3a;text-transform:uppercase;letter-spacing:.08em}
+.feed-state.offline{color:#ffb34d}.feed-state.error{color:#ff6b6b}
+.updated{font-size:10px}
+.team-copy{min-width:0}.team-meta{font-size:9px;color:#89958d;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.score{min-width:56px;text-align:right;font-weight:900;color:#edf7ef}
+.score .unit{font-size:8px;color:#8e9a92;margin-left:2px;text-transform:uppercase}
+.score.leading{color:#a8ef40;text-shadow:0 0 12px rgba(156,229,55,.25)}
+.match.complete{border-color:rgba(154,221,58,.5);box-shadow:0 0 0 1px rgba(154,221,58,.08),0 14px 34px rgba(0,0,0,.25)}
+.team.winner{background:rgba(148,218,53,.10)}
+.team.loser{opacity:.45}
+.status-pill{font-size:8px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:3px 6px;border-radius:999px;background:rgba(255,255,255,.06);color:#9ba69e}
+.status-pill.live{background:rgba(255,77,77,.12);color:#ff7777}.status-pill.final{background:rgba(154,221,58,.14);color:#a8ef40}
