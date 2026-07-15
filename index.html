@@ -14,75 +14,25 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="fx" aria-hidden="true"></div>
-
   <section class="rotate-gate" id="rotateGate">
     <div class="rotate-card">
       <div class="rotate-icon">↻</div>
-      <div class="kicker">FULL-SCREEN FINALS CENTRE</div>
       <h1>Rotate your phone</h1>
-      <p>This fixture is built to fill the entire landscape screen.</p>
+      <p>The complete finals map fits on one landscape screen.</p>
       <button id="landscapeButton" type="button">Open landscape</button>
     </div>
   </section>
 
-  <main class="fixture-shell">
+  <main class="app-shell">
     <header class="topbar">
-      <div class="brand">
-        <span class="cup-mark">🏆</span>
-        <div>
-          <div class="kicker">BIGOLE KNOCKOUT CUP · TOP 8 · 4 WEEKS</div>
-          <h1>Road to the title</h1>
-        </div>
-      </div>
-      <div class="status-cluster">
-        <button class="admin-button" id="adminButton" type="button" aria-label="Admin controls">🔒</button>
-        <span class="round-badge" id="roundBadge">ROUND —</span>
-        <span class="feed-badge" id="feedState">LOADING</span>
-        <span class="updated" id="updatedAt"></span>
-      </div>
+      <div class="brand"><span>🏆</span><strong>BIGOLE KNOCKOUT CUP</strong></div>
+      <div class="title">Road to the title</div>
+      <div class="status"><b id="roundBadge">ROUND —</b><em id="feedState">LOADING</em></div>
     </header>
 
-    <section class="bracket" id="bracket" aria-label="BIGOLE Knockout Cup finals bracket"></section>
-
-    <footer class="footerbar">
-      <div class="legend">
-        <span><i class="dot double"></i> Double chance</span>
-        <span><i class="dot danger"></i> Lose = out</span>
-        <span><i class="dot live"></i> Provisional</span>
-        <span><i class="dot final"></i> Final</span>
-      </div>
-      <div class="champion-mini" id="championMini"><span>CHAMPION</span><strong>Waiting</strong></div>
-    </footer>
+    <section class="bracket" id="bracket" aria-label="Top eight four-week knockout bracket"></section>
   </main>
 
-  <section class="admin-modal" id="adminModal" aria-hidden="true">
-    <div class="admin-panel">
-      <button class="admin-close" id="adminClose" type="button">×</button>
-      <div class="kicker">ADMIN CONTROL</div>
-      <h2>Finalise knockout week</h2>
-      <p id="adminMessage">Sign in to unlock the final score switch.</p>
-      <form id="adminLoginForm" class="admin-login">
-        <input id="adminEmail" type="email" placeholder="Admin email" autocomplete="username" required>
-        <input id="adminPassword" type="password" placeholder="Password" autocomplete="current-password" required>
-        <button type="submit">Unlock</button>
-      </form>
-      <div class="admin-controls" id="adminControls" hidden>
-        <div class="week-readout">Current knockout week <strong id="adminWeek">—</strong></div>
-        <label class="final-switch">
-          <span>PROVISIONAL</span>
-          <input id="finalToggle" type="checkbox">
-          <i></i>
-          <span>FINAL</span>
-        </label>
-        <button class="confirm-final" id="confirmFinal" type="button">Confirm final scores and advance</button>
-        <button class="admin-logout" id="adminLogout" type="button">Log out</button>
-      </div>
-    </div>
-  </section>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
