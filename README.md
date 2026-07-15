@@ -1,20 +1,11 @@
 # BIGOLE Knockout Cup
 
-Standalone, landscape-first finals bracket.
+Exact compact SuperCoach-style four-week finals map.
 
-## Display contract
-
-- One complete bracket on one screen.
-- No horizontal or vertical scrolling.
-- A fixed 1600 × 720 design canvas scales uniformly to every landscape viewport.
-- Week 1 displays league-table points.
-- Weeks 2–4 display that finals round's score.
-- Qualifying-final winners bypass Week 2 and enter Week 3.
+- One landscape screen.
+- No scrolling.
+- Week 1 shows ladder points beside team names.
+- Later rounds show round scores.
+- Top-four winners visibly bypass Week 2.
 - Tim is excluded before seeding.
-
-Data is read from `data/live.json` and refreshed every 60 seconds.
-
-
-## v2 viewport fix
-
-The canvas is anchored at top-left and translated by measured pixel offsets before scaling. Asset query versions prevent GitHub Pages/Safari from reusing the broken cached CSS or JavaScript.
+- Data refreshes from `data/live.json` every 60 seconds.

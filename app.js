@@ -1,134 +1,32 @@
-const DATA_URL='data/live.json';
-const REFRESH_MS=60_000;
-
-function seedsFrom(data){
-  return [...data.standings]
-    .filter(x=>x.coach.toLowerCase()!==data.excludedCoach.toLowerCase())
-    .sort((a,b)=>b.leaguePoints-a.leaguePoints||b.totalPoints-a.totalPoints)
-    .slice(0,8).map((x,i)=>({...x,seed:i+1}));
+const W=1280,H=700,DATA='data/live.json';
+function fit(){const c=document.getElementById('canvas');const v=window.visualViewport;const w=v?.width||innerWidth,h=v?.height||innerHeight;const s=Math.min(w/W,h/H);c.style.transform=`translate(${Math.max(0,(w-W*s)/2)}px,${Math.max(0,(h-H*s)/2)}px) scale(${s})`;}
+function seeds(d){return [...d.standings].filter(x=>x.coach.toLowerCase()!==String(d.excludedCoach).toLowerCase()).sort((a,b)=>b.leaguePoints-a.leaguePoints||b.totalPoints-a.totalPoints).slice(0,8).map((x,i)=>({...x,seed:i+1}))}
+function node(x,y,t,week=1,cls=''){if(!t)return `<div class="node future ${cls}" style="left:${x}px;top:${y}px"><div class="seed">–</div><div class="team"><div class="name">TBD</div><div class="coach">Waiting for result</div><div class="value">—</div></div></div>`;const val=week===1?`${t.leaguePoints}<small>pts</small>`:(t.roundScore||'—');return `<div class="node ${cls}" style="left:${x}px;top:${y}px"><div class="seed">${t.seed??'–'}</div><div class="team"><div class="name">${t.team}</div><div class="coach">${t.coach}</div><div class="value">${val}</div></div></div>`}
+function render(d){const s=seeds(d),[a,b,c,e,f,g,h,i]=s;document.getElementById('status').textContent=`ROUND ${d.round??'—'} · ${d.phase==='regular'?'LADDER':'FINALS'}`;document.getElementById('bracket').innerHTML=`
+<div class="round-label r1">WEEK 1</div><div class="round-label r2">WEEK 2</div><div class="round-label r3">WEEK 3</div><div class="round-label r4">WEEK 4</div>
+<div class="note n1">TOP 4: WIN → WEEK 3 · LOSE → WEEK 2</div><div class="note n2">SEMI FINALS</div><div class="note n3">PRELIMINARY FINALS</div><div class="note n4">GRAND FINAL</div>
+<svg class="map" viewBox="0 0 1212 590" preserveAspectRatio="none">
+<path d="M245 75 H292 V105 H335"/><circle cx="292" cy="105" r="13"/><rect x="335" y="80" width="70" height="50" rx="4"/>
+<path d="M245 165 H292 V105"/>
+<path d="M245 75 H620 V105 H665"/><circle cx="620" cy="105" r="13"/><rect x="665" y="80" width="70" height="50" rx="4"/>
+<path d="M405 105 H500 V195 H620 V275 H665"/><circle cx="620" cy="275" r="13"/><rect x="665" y="250" width="70" height="50" rx="4"/>
+<path d="M245 245 H292 V275 H335"/><circle cx="292" cy="275" r="13"/><rect x="335" y="250" width="70" height="50" rx="4"/>
+<path d="M245 335 H292 V275"/>
+<path d="M245 415 H292 V445 H335"/><circle cx="292" cy="445" r="13"/><rect x="335" y="420" width="70" height="50" rx="4"/>
+<path d="M245 505 H292 V445"/>
+<path d="M245 415 H620 V445 H665"/><circle cx="620" cy="445" r="13"/><rect x="665" y="420" width="70" height="50" rx="4"/>
+<path d="M405 445 H500 V355 H620 V275"/>
+<path d="M735 105 H850 V190 H895"/><circle cx="850" cy="190" r="13"/><rect x="895" y="165" width="70" height="50" rx="4"/>
+<path d="M735 275 H850 V190"/>
+<path d="M735 275 H850 V360 H895"/><circle cx="850" cy="360" r="13"/><rect x="895" y="335" width="70" height="50" rx="4"/>
+<path d="M735 445 H850 V360"/>
+<path d="M965 190 H1060 V275 H1105"/><circle cx="1060" cy="275" r="13"/><rect x="1105" y="250" width="70" height="50" rx="4"/>
+<path d="M965 360 H1060 V275"/>
+</svg>
+${node(0,48,a)}${node(0,138,e)}${node(0,218,f)}${node(0,308,i)}${node(0,388,g)}${node(0,478,h)}${node(0,558,b)}${node(0,648,c)}
+${node(305,78,null,2,'future')}${node(305,248,null,2,'future')}${node(305,418,null,2,'future')}
+${node(635,78,null,3,'future')}${node(635,248,null,3,'future')}${node(635,418,null,3,'future')}
+${node(865,163,null,4,'future final')}${node(865,333,null,4,'future final')}${node(1075,248,null,4,'future final')}`;
 }
-function byTeam(seeds,name){return seeds.find(x=>x.team===name)||null}
-function result(match,seeds){
-  if(!match)return{a:null,b:null,status:'waiting',winner:null,scores:null};
-  return{a:byTeam(seeds,match.a),b:byTeam(seeds,match.b),status:match.status||'waiting',winner:match.winner||null,scores:match.scores||null};
-}
-function scoreFor(team,match,side){
-  if(!team)return null;
-  if(match?.scores && Number.isFinite(match.scores[side]))return match.scores[side];
-  if(Number.isFinite(team.roundScore))return team.roundScore;
-  return 0;
-}
-function valueFor(team,week,match,side){
-  if(!team)return'—';
-  if(week===1)return`${team.leaguePoints}<small>pts</small>`;
-  const value=scoreFor(team,match,side);
-  return value>0?String(value):'—';
-}
-function teamRow(team,week,data,match,side,winner,loser){
-  if(!team)return`<div class="team"><div class="seed">–</div><div class="copy"><div class="name pending">TBD</div><div class="coach">Waiting for result</div></div><div class="score pending">—</div></div>`;
-  const isWinner=winner===team.team,isLoser=loser===team.team;
-  return`<div class="team active ${isWinner?'winner':''} ${isLoser?'loser':''}"><div class="seed">${team.seed??'–'}</div><div class="copy"><div class="name">${team.team}</div><div class="coach">${team.coach}</div></div><div class="score ${isWinner?'lead':''}">${valueFor(team,week,match,side)}</div></div>`;
-}
-function card({className,label,type='',route='',a,b,data,status='waiting',winner=null,week,match}){
-  const loser=winner&&a&&b?(winner===a.team?b.team:a.team):null;
-  const state=status==='final'?'FINAL':status==='live'?'LIVE':'';
-  return`<article class="match ${className} ${type} ${status==='final'?'complete':''}"><div class="match-label"><span>${label}</span>${route?`<span class="route ${type==='qualifying'?'skip':'out'}">${route}</span>`:''}${state?`<span class="state ${status}">${state}</span>`:''}</div>${teamRow(a,week,data,match,'a',winner,loser)}${teamRow(b,week,data,match,'b',winner,loser)}</article>`;
-}
-function render(data){
-  const s=seedsFrom(data),[s1,s2,s3,s4,s5,s6,s7,s8]=s,m=data.finals?.matches||{};
-  const qf1=result(m.qf1,s),ef1=result(m.ef1,s),ef2=result(m.ef2,s),qf2=result(m.qf2,s),sf1=result(m.sf1,s),sf2=result(m.sf2,s),pf1=result(m.pf1,s),pf2=result(m.pf2,s),gf=result(m.gf,s);
-  document.getElementById('bracket').innerHTML=`
-  <svg class="route-map" viewBox="0 0 1568 616" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <marker id="arrowLime" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a8ed37"/></marker>
-      <marker id="arrowAmber" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#ffc85a"/></marker>
-    </defs>
-    <g class="route-standard">
-      <path d="M467 100 H482 V172 H493" marker-end="url(#arrowLime)"/>
-      <path d="M467 245 H482 V172 H493" marker-end="url(#arrowLime)"/>
-      <path d="M467 390 H482 V462 H493" marker-end="url(#arrowLime)"/>
-      <path d="M467 535 H482 V462 H493" marker-end="url(#arrowLime)"/>
-      <path d="M842 172 H855 V462 H868" marker-end="url(#arrowLime)"/>
-      <path d="M842 462 H855 V172 H868" marker-end="url(#arrowLime)"/>
-      <path d="M1217 172 H1230 V317 H1243" marker-end="url(#arrowLime)"/>
-      <path d="M1217 462 H1230 V317 H1243" marker-end="url(#arrowLime)"/>
-    </g>
-    <g class="route-bypass">
-      <path d="M467 100 H690 V82 H855 V172 H868" marker-end="url(#arrowAmber)"/>
-      <path d="M467 535 H690 V553 H855 V462 H868" marker-end="url(#arrowAmber)"/>
-    </g>
-    <g class="route-labels">
-      <text x="575" y="73">WIN: SKIP WEEK 2</text>
-      <text x="575" y="574">WIN: SKIP WEEK 2</text>
-      <text x="471" y="155">LOSE</text>
-      <text x="471" y="445">LOSE</text>
-      <text x="471" y="232">WIN</text>
-      <text x="471" y="405">WIN</text>
-    </g>
-  </svg>
-  <section class="round w1"><div class="round-title">Week 1 <small>League points shown</small></div>
-    ${card({className:'m1',label:'Qualifying Final 1',type:'qualifying',route:'WIN → W3 · LOSE → W2',a:qf1.a||s1,b:qf1.b||s4,data,status:qf1.status,winner:qf1.winner,week:1,match:qf1})}
-    ${card({className:'m2',label:'Elimination Final 1',type:'elimination',route:'WIN → W2 · LOSE OUT',a:ef1.a||s5,b:ef1.b||s8,data,status:ef1.status,winner:ef1.winner,week:1,match:ef1})}
-    ${card({className:'m3',label:'Elimination Final 2',type:'elimination',route:'WIN → W2 · LOSE OUT',a:ef2.a||s6,b:ef2.b||s7,data,status:ef2.status,winner:ef2.winner,week:1,match:ef2})}
-    ${card({className:'m4',label:'Qualifying Final 2',type:'qualifying',route:'WIN → W3 · LOSE → W2',a:qf2.a||s2,b:qf2.b||s3,data,status:qf2.status,winner:qf2.winner,week:1,match:qf2})}
-  </section>
-  <section class="round w2"><div class="round-title">Week 2 <small>Round score</small></div>
-    ${card({className:'m1',label:'Semi Final 1',a:sf1.a,b:sf1.b,data,status:sf1.status,winner:sf1.winner,week:2,match:sf1})}
-    ${card({className:'m2',label:'Semi Final 2',a:sf2.a,b:sf2.b,data,status:sf2.status,winner:sf2.winner,week:2,match:sf2})}
-  </section>
-  <section class="round w3"><div class="round-title">Week 3 <small>Top-4 winners return</small></div>
-    ${card({className:'m1',label:'Preliminary Final 1',a:pf1.a,b:pf1.b,data,status:pf1.status,winner:pf1.winner,week:3,match:pf1})}
-    ${card({className:'m2',label:'Preliminary Final 2',a:pf2.a,b:pf2.b,data,status:pf2.status,winner:pf2.winner,week:3,match:pf2})}
-  </section>
-  <section class="round w4"><div class="round-title">Week 4 <small>Grand Final</small></div>
-    ${card({className:'m1',label:'Grand Final',a:gf.a,b:gf.b,data,status:gf.status,winner:gf.winner,week:4,match:gf})}
-  </section>`;
-  document.getElementById('roundBadge').textContent=`ROUND ${data.round??'—'}`;
-  const state=document.getElementById('feedState');
-  state.className=data.roundStatus==='FINAL'?'final':data.sourceStatus==='live'?'live':'';
-  state.textContent=data.phase==='regular'?'LADDER':data.roundStatus==='FINAL'?'FINAL':'PROVISIONAL';
-}
-async function loadData(){
-  try{const r=await fetch(`${DATA_URL}?t=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw new Error(r.status);render(await r.json())}
-  catch(e){const s=document.getElementById('feedState');s.className='error';s.textContent='DATA ERROR';console.error(e)}
-}
-async function landscape(){try{if(!document.fullscreenElement&&document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();if(screen.orientation?.lock)await screen.orientation.lock('landscape')}catch{}}
-document.getElementById('landscapeButton')?.addEventListener('click',landscape);
-loadData();setInterval(loadData,REFRESH_MS);
-
-const DESIGN_WIDTH=1600;
-const DESIGN_HEIGHT=720;
-
-function viewportSize(){
-  const vv=window.visualViewport;
-  return {
-    width:Math.max(1,Math.round(vv?.width||window.innerWidth||document.documentElement.clientWidth||DESIGN_WIDTH)),
-    height:Math.max(1,Math.round(vv?.height||window.innerHeight||document.documentElement.clientHeight||DESIGN_HEIGHT))
-  };
-}
-
-function fitCanvas(){
-  const canvas=document.getElementById('designCanvas');
-  if(!canvas)return;
-  const {width,height}=viewportSize();
-  const scale=Math.min(width/DESIGN_WIDTH,height/DESIGN_HEIGHT);
-  const renderedWidth=DESIGN_WIDTH*scale;
-  const renderedHeight=DESIGN_HEIGHT*scale;
-  const offsetX=Math.max(0,(width-renderedWidth)/2);
-  const offsetY=Math.max(0,(height-renderedHeight)/2);
-
-  canvas.style.left='0px';
-  canvas.style.top='0px';
-  canvas.style.transformOrigin='0 0';
-  canvas.style.transform=`translate3d(${offsetX}px,${offsetY}px,0) scale(${scale})`;
-}
-
-fitCanvas();
-requestAnimationFrame(fitCanvas);
-setTimeout(fitCanvas,50);
-setTimeout(fitCanvas,250);
-window.addEventListener('resize',fitCanvas,{passive:true});
-window.addEventListener('orientationchange',()=>{fitCanvas();setTimeout(fitCanvas,120);setTimeout(fitCanvas,400)},{passive:true});
-window.visualViewport?.addEventListener('resize',fitCanvas,{passive:true});
-window.visualViewport?.addEventListener('scroll',fitCanvas,{passive:true});
-document.fonts?.ready?.then(fitCanvas);
+async function load(){try{const r=await fetch(`${DATA}?v=${Date.now()}`,{cache:'no-store'});render(await r.json())}catch(e){document.getElementById('status').textContent='DATA ERROR'}}
+fit();load();setInterval(load,60000);addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,150));visualViewport?.addEventListener('resize',fit);
