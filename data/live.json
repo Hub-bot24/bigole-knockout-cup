@@ -6,73 +6,16 @@
   "updatedAt": "2026-07-15T03:07:00+10:00",
   "sourceStatus": "manual_snapshot",
   "standings": [
-    {
-      "team": "Cooma Stallions",
-      "coach": "Tim",
-      "leaguePoints": 34,
-      "totalPoints": 24554,
-      "roundScore": 0
-    },
-    {
-      "team": "BIGOLE",
-      "coach": "Joel",
-      "leaguePoints": 30,
-      "totalPoints": 25105,
-      "roundScore": 0
-    },
-    {
-      "team": "Multch\u2019s Magoo\u2019s",
-      "coach": "Mitch",
-      "leaguePoints": 28,
-      "totalPoints": 24658,
-      "roundScore": 0
-    },
-    {
-      "team": "Ballbags",
-      "coach": "Hayden",
-      "leaguePoints": 28,
-      "totalPoints": 24035,
-      "roundScore": 0
-    },
-    {
-      "team": "The amateurs",
-      "coach": "Jhai",
-      "leaguePoints": 26,
-      "totalPoints": 24262,
-      "roundScore": 0
-    },
-    {
-      "team": "I love Herbie",
-      "coach": "Blake",
-      "leaguePoints": 26,
-      "totalPoints": 23476,
-      "roundScore": 0
-    },
-    {
-      "team": "Bonogin Brawlers",
-      "coach": "Matt",
-      "leaguePoints": 24,
-      "totalPoints": 23332,
-      "roundScore": 0
-    },
-    {
-      "team": "BARRY",
-      "coach": "Kyle",
-      "leaguePoints": 22,
-      "totalPoints": 23788,
-      "roundScore": 0
-    },
-    {
-      "team": "Bridgette",
-      "coach": "Bridgette",
-      "leaguePoints": 20,
-      "totalPoints": 23046,
-      "roundScore": 0
-    }
+    {"team":"Cooma Stallions","coach":"Tim","leaguePoints":34,"totalPoints":24554,"roundScore":0},
+    {"team":"BIGOLE","coach":"Joel","leaguePoints":30,"totalPoints":25105,"roundScore":0},
+    {"team":"Multch’s Magoo’s","coach":"Mitch","leaguePoints":28,"totalPoints":24658,"roundScore":0},
+    {"team":"Ballbags","coach":"Hayden","leaguePoints":28,"totalPoints":24035,"roundScore":0},
+    {"team":"The amateurs","coach":"Jhai","leaguePoints":26,"totalPoints":24262,"roundScore":0},
+    {"team":"I love Herbie","coach":"Blake","leaguePoints":26,"totalPoints":23476,"roundScore":0},
+    {"team":"Bonogin Brawlers","coach":"Matt","leaguePoints":24,"totalPoints":23332,"roundScore":0},
+    {"team":"BARRY","coach":"Kyle","leaguePoints":22,"totalPoints":23788,"roundScore":0},
+    {"team":"Bridgette","coach":"Bridgette","leaguePoints":20,"totalPoints":23046,"roundScore":0}
   ],
-  "finals": {
-    "week": 0,
-    "matches": {}
-  },
-  "roundStatus": "PROVISIONAL"
+  "finals":{"week":0,"matches":{}},
+  "roundStatus":"PROVISIONAL"
 }
