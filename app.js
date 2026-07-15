@@ -38,6 +38,34 @@ function render(data){
   const s=seedsFrom(data),[s1,s2,s3,s4,s5,s6,s7,s8]=s,m=data.finals?.matches||{};
   const qf1=result(m.qf1,s),ef1=result(m.ef1,s),ef2=result(m.ef2,s),qf2=result(m.qf2,s),sf1=result(m.sf1,s),sf2=result(m.sf2,s),pf1=result(m.pf1,s),pf2=result(m.pf2,s),gf=result(m.gf,s);
   document.getElementById('bracket').innerHTML=`
+  <svg class="route-map" viewBox="0 0 1568 616" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <marker id="arrowLime" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#a8ed37"/></marker>
+      <marker id="arrowAmber" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#ffc85a"/></marker>
+    </defs>
+    <g class="route-standard">
+      <path d="M467 100 H482 V172 H493" marker-end="url(#arrowLime)"/>
+      <path d="M467 245 H482 V172 H493" marker-end="url(#arrowLime)"/>
+      <path d="M467 390 H482 V462 H493" marker-end="url(#arrowLime)"/>
+      <path d="M467 535 H482 V462 H493" marker-end="url(#arrowLime)"/>
+      <path d="M842 172 H855 V462 H868" marker-end="url(#arrowLime)"/>
+      <path d="M842 462 H855 V172 H868" marker-end="url(#arrowLime)"/>
+      <path d="M1217 172 H1230 V317 H1243" marker-end="url(#arrowLime)"/>
+      <path d="M1217 462 H1230 V317 H1243" marker-end="url(#arrowLime)"/>
+    </g>
+    <g class="route-bypass">
+      <path d="M467 100 H690 V82 H855 V172 H868" marker-end="url(#arrowAmber)"/>
+      <path d="M467 535 H690 V553 H855 V462 H868" marker-end="url(#arrowAmber)"/>
+    </g>
+    <g class="route-labels">
+      <text x="575" y="73">WIN: SKIP WEEK 2</text>
+      <text x="575" y="574">WIN: SKIP WEEK 2</text>
+      <text x="471" y="155">LOSE</text>
+      <text x="471" y="445">LOSE</text>
+      <text x="471" y="232">WIN</text>
+      <text x="471" y="405">WIN</text>
+    </g>
+  </svg>
   <section class="round w1"><div class="round-title">Week 1 <small>League points shown</small></div>
     ${card({className:'m1',label:'Qualifying Final 1',type:'qualifying',route:'WIN → W3 · LOSE → W2',a:qf1.a||s1,b:qf1.b||s4,data,status:qf1.status,winner:qf1.winner,week:1,match:qf1})}
     ${card({className:'m2',label:'Elimination Final 1',type:'elimination',route:'WIN → W2 · LOSE OUT',a:ef1.a||s5,b:ef1.b||s8,data,status:ef1.status,winner:ef1.winner,week:1,match:ef1})}
@@ -70,17 +98,37 @@ loadData();setInterval(loadData,REFRESH_MS);
 
 const DESIGN_WIDTH=1600;
 const DESIGN_HEIGHT=720;
+
+function viewportSize(){
+  const vv=window.visualViewport;
+  return {
+    width:Math.max(1,Math.round(vv?.width||window.innerWidth||document.documentElement.clientWidth||DESIGN_WIDTH)),
+    height:Math.max(1,Math.round(vv?.height||window.innerHeight||document.documentElement.clientHeight||DESIGN_HEIGHT))
+  };
+}
+
 function fitCanvas(){
   const canvas=document.getElementById('designCanvas');
   if(!canvas)return;
-  const viewport=window.visualViewport;
-  const width=Math.max(1,viewport?.width||window.innerWidth||document.documentElement.clientWidth);
-  const height=Math.max(1,viewport?.height||window.innerHeight||document.documentElement.clientHeight);
+  const {width,height}=viewportSize();
   const scale=Math.min(width/DESIGN_WIDTH,height/DESIGN_HEIGHT);
-  canvas.style.transform=`translate(-50%,-50%) scale(${scale})`;
+  const renderedWidth=DESIGN_WIDTH*scale;
+  const renderedHeight=DESIGN_HEIGHT*scale;
+  const offsetX=Math.max(0,(width-renderedWidth)/2);
+  const offsetY=Math.max(0,(height-renderedHeight)/2);
+
+  canvas.style.left='0px';
+  canvas.style.top='0px';
+  canvas.style.transformOrigin='0 0';
+  canvas.style.transform=`translate3d(${offsetX}px,${offsetY}px,0) scale(${scale})`;
 }
+
 fitCanvas();
+requestAnimationFrame(fitCanvas);
+setTimeout(fitCanvas,50);
+setTimeout(fitCanvas,250);
 window.addEventListener('resize',fitCanvas,{passive:true});
-window.addEventListener('orientationchange',()=>setTimeout(fitCanvas,120),{passive:true});
+window.addEventListener('orientationchange',()=>{fitCanvas();setTimeout(fitCanvas,120);setTimeout(fitCanvas,400)},{passive:true});
 window.visualViewport?.addEventListener('resize',fitCanvas,{passive:true});
+window.visualViewport?.addEventListener('scroll',fitCanvas,{passive:true});
 document.fonts?.ready?.then(fitCanvas);

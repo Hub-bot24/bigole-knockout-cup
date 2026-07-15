@@ -13,3 +13,8 @@ Standalone, landscape-first finals bracket.
 - Tim is excluded before seeding.
 
 Data is read from `data/live.json` and refreshed every 60 seconds.
+
+
+## v2 viewport fix
+
+The canvas is anchored at top-left and translated by measured pixel offsets before scaling. Asset query versions prevent GitHub Pages/Safari from reusing the broken cached CSS or JavaScript.
