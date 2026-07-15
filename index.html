@@ -1,67 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
-  <meta name="theme-color" content="#080b09" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no" />
+  <meta name="theme-color" content="#050806" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>BIGOLE Knockout Cup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="rotate-gate" id="rotateGate">
-    <div class="rotate-card">
-      <div class="phone-icon" aria-hidden="true">↻</div>
-      <div class="eyebrow">LANDSCAPE REQUIRED</div>
-      <h1>Rotate your phone</h1>
-      <p>The full finals pathway is designed to fill the screen in landscape.</p>
-      <button id="landscapeButton" type="button">Open in landscape</button>
-    </div>
-  </div>
+  <div class="fx" aria-hidden="true"></div>
 
-  <main class="shell">
-    <section class="bracket-card">
-      <header class="section-heading">
+  <section class="rotate-gate" id="rotateGate">
+    <div class="rotate-card">
+      <div class="rotate-icon">↻</div>
+      <div class="kicker">FULL-SCREEN FINALS CENTRE</div>
+      <h1>Rotate your phone</h1>
+      <p>This fixture is built to fill the entire landscape screen.</p>
+      <button id="landscapeButton" type="button">Open landscape</button>
+    </div>
+  </section>
+
+  <main class="fixture-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="cup-mark">🏆</span>
         <div>
-          <div class="eyebrow">FINALS SERIES · TOP 8 · 4 WEEKS</div>
+          <div class="kicker">BIGOLE KNOCKOUT CUP · TOP 8 · 4 WEEKS</div>
           <h1>Road to the title</h1>
         </div>
-        <div class="live-meta">
-          <span class="feed-state" id="feedState">Loading data…</span>
-          <span class="updated" id="updatedAt"></span>
-        </div>
-      </header>
-
-      <div class="rule-strip">
-        <div><strong>Week 1</strong><span>1–4 double chance. 5–8 lose and they are out.</span></div>
-        <div><strong>Week 2</strong><span>Qualifying losers face elimination winners.</span></div>
-        <div><strong>Week 3</strong><span>Qualifying winners enter the preliminary finals.</span></div>
-        <div><strong>Week 4</strong><span>Preliminary winners play for the cup.</span></div>
       </div>
-
-      <div class="bracket" id="bracket" aria-label="Four-week finals bracket"></div>
-    </section>
-
-    <section class="champion-card" id="championCard">
-      <div>
-        <div class="eyebrow">GRAND FINAL</div>
-        <h2 id="championName">Champion waiting</h2>
-        <p id="championText">The winner of Week 4 will light up this card.</p>
+      <div class="status-cluster">
+        <button class="admin-button" id="adminButton" type="button" aria-label="Admin controls">🔒</button>
+        <span class="round-badge" id="roundBadge">ROUND —</span>
+        <span class="feed-badge" id="feedState">LOADING</span>
+        <span class="updated" id="updatedAt"></span>
       </div>
-      <div class="trophy" aria-hidden="true">🏆</div>
-    </section>
+    </header>
 
-    <footer>
-      <span>BIGOLE Knockout Cup</span>
-      <span>Tim excluded before seeding · ladder re-seeded automatically</span>
+    <section class="bracket" id="bracket" aria-label="BIGOLE Knockout Cup finals bracket"></section>
+
+    <footer class="footerbar">
+      <div class="legend">
+        <span><i class="dot double"></i> Double chance</span>
+        <span><i class="dot danger"></i> Lose = out</span>
+        <span><i class="dot live"></i> Provisional</span>
+        <span><i class="dot final"></i> Final</span>
+      </div>
+      <div class="champion-mini" id="championMini"><span>CHAMPION</span><strong>Waiting</strong></div>
     </footer>
   </main>
+
+  <section class="admin-modal" id="adminModal" aria-hidden="true">
+    <div class="admin-panel">
+      <button class="admin-close" id="adminClose" type="button">×</button>
+      <div class="kicker">ADMIN CONTROL</div>
+      <h2>Finalise knockout week</h2>
+      <p id="adminMessage">Sign in to unlock the final score switch.</p>
+      <form id="adminLoginForm" class="admin-login">
+        <input id="adminEmail" type="email" placeholder="Admin email" autocomplete="username" required>
+        <input id="adminPassword" type="password" placeholder="Password" autocomplete="current-password" required>
+        <button type="submit">Unlock</button>
+      </form>
+      <div class="admin-controls" id="adminControls" hidden>
+        <div class="week-readout">Current knockout week <strong id="adminWeek">—</strong></div>
+        <label class="final-switch">
+          <span>PROVISIONAL</span>
+          <input id="finalToggle" type="checkbox">
+          <i></i>
+          <span>FINAL</span>
+        </label>
+        <button class="confirm-final" id="confirmFinal" type="button">Confirm final scores and advance</button>
+        <button class="admin-logout" id="adminLogout" type="button">Log out</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
