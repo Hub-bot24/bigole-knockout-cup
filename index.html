@@ -3,136 +3,84 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
-  <meta name="theme-color" content="#020403" />
+  <meta name="theme-color" content="#202a28" />
   <title>BIGOLE Knockout Cup</title>
-  <link rel="stylesheet" href="styles.css?v=exact-map-1" />
+  <link rel="stylesheet" href="styles.css?v=official-map-1" />
 </head>
 <body>
-  <div id="rotateGate">
-    <div><div class="phone">↻</div><strong>Rotate your phone</strong><span>This finals map is landscape only.</span></div>
-  </div>
-
+  <div id="rotateGate"><div><div class="phone">↻</div><strong>Rotate your phone</strong><span>This finals map is landscape only.</span></div></div>
   <main id="viewport">
     <section id="stage" aria-label="BIGOLE Knockout Cup finals bracket">
-      <svg id="bracket" viewBox="0 0 1116 644" role="img" aria-labelledby="title desc">
+      <svg id="bracket" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
         <title id="title">BIGOLE Knockout Cup Top 8 Finals Series</title>
-        <desc id="desc">Top four qualifying winners skip week two. Qualifying losers enter the semi finals. Elimination-final winners enter the semi finals.</desc>
-
+        <desc id="desc">Top four qualifying winners skip week two. Qualifying losers play elimination winners in week two.</desc>
         <defs>
-          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="3.2" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <linearGradient id="slotFill" x1="0" x2="1">
-            <stop offset="0" stop-color="#090d0b"/>
-            <stop offset="1" stop-color="#151a17"/>
-          </linearGradient>
-          <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#78d10d"/>
-          </marker>
-          <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
-            <path d="M0,0 L8,4 L0,8 Z" fill="#ff7a12"/>
-          </marker>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <linearGradient id="panel" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#35413f"/><stop offset="1" stop-color="#26312f"/></linearGradient>
+          <linearGradient id="card" x1="0" x2="1"><stop offset="0" stop-color="#72803f"/><stop offset="1" stop-color="#89964e"/></linearGradient>
         </defs>
 
-        <rect class="bg" x="0" y="0" width="1116" height="644" />
+        <rect class="bg" x="0" y="0" width="1280" height="720" rx="4" />
+        <rect class="top-line" x="0" y="0" width="1280" height="4" />
+        <text class="kicker" x="36" y="42">FINALS SERIES</text><circle class="status-dot" cx="206" cy="35" r="12" />
+        <text class="heading" x="640" y="42" text-anchor="middle">TOP 8 · 4 ROUNDS</text>
+        <text class="meta" id="meta" x="1240" y="42" text-anchor="end">ROUND 19 · LADDER</text>
 
-        <g class="headings">
-          <text x="80" y="27">TOP 8 - 4 ROUNDS</text>
-          <text x="410" y="27">SEMI FINALS</text>
-          <text x="678" y="27">PRELIMINARY FINALS</text>
-          <text x="947" y="27">GRAND FINAL</text>
-        </g>
+        <text class="week" x="42" y="91">WEEK 1</text><text class="sub" x="42" y="110">CURRENT SEEDING</text>
+        <text class="week" x="360" y="91">WEEK 2</text><text class="sub" x="360" y="110">SEMI FINALS</text>
+        <text class="week" x="672" y="91">WEEK 3</text><text class="sub" x="672" y="110">PRELIMINARY FINALS</text>
+        <text class="week" x="1007" y="91">WEEK 4</text><text class="sub" x="1007" y="110">GRAND FINAL</text>
 
-        <!-- WEEK 1 matchup connectors: exactly four yellow brackets -->
-        <g class="matchup-connectors">
-          <path d="M254 74 H300 V140 H254"/>
-          <path d="M254 206 H300 V274 H254"/>
-          <path d="M254 342 H300 V410 H254"/>
-          <path d="M254 478 H300 V544 H254"/>
-        </g>
-
-        <!-- Winner / loser routes: exact requested structure -->
+        <!-- official-style route geometry -->
         <g class="routes">
-          <!-- 1 v 4: winner skips week 2, loser enters Semi Final 1 -->
-          <path class="winner" marker-end="url(#arrowGreen)" d="M300 82 H656"/>
-          <path class="loser" marker-end="url(#arrowOrange)" d="M300 114 H365 V188 H424"/>
+          <!-- QF1 winner bypass to PF1 -->
+          <path d="M 240 150 H 600 V 178 H 676" />
+          <!-- QF1 loser to SF1 -->
+          <path d="M 240 150 H 282 V 224 H 360" />
+          <!-- EF1 winner to SF1 -->
+          <path d="M 240 264 H 282 V 224 H 360" />
+          <!-- SF1 winner to PF2 -->
+          <path d="M 548 224 H 600 V 422 H 676" />
 
-          <!-- 5 v 8: ONE winner line only into Semi Final 1 -->
-          <path class="winner" marker-end="url(#arrowGreen)" d="M300 236 H424"/>
+          <!-- EF2 winner to SF2 -->
+          <path d="M 240 378 H 282 V 492 H 360" />
+          <!-- QF2 loser to SF2 -->
+          <path d="M 240 606 H 282 V 492 H 360" />
+          <!-- QF2 winner bypass to PF2 -->
+          <path d="M 240 606 H 600 V 466 H 676" />
+          <!-- SF2 winner to PF1 -->
+          <path d="M 548 492 H 600 V 222 H 676" />
 
-          <!-- 6 v 7: ONE winner line only into Semi Final 2 -->
-          <path class="winner" marker-end="url(#arrowGreen)" d="M300 370 H424"/>
-
-          <!-- 2 v 3: winner skips week 2, loser enters Semi Final 2 -->
-          <path class="loser" marker-end="url(#arrowOrange)" d="M300 506 H365 V414 H424"/>
-          <path class="winner" marker-end="url(#arrowGreen)" d="M300 522 H656"/>
-
-          <!-- Semi-final winners cross over -->
-          <path class="winner" marker-end="url(#arrowGreen)" d="M560 226 H592 L659 405"/>
-          <path class="winner" marker-end="url(#arrowGreen)" d="M560 372 H592 L659 146"/>
-
-          <!-- Preliminary-final winners into grand final -->
-          <path class="winner" marker-end="url(#arrowGreen)" d="M841 113 H904 V289 H932"/>
-          <path class="winner" marker-end="url(#arrowGreen)" d="M846 471 H904 V289"/>
-          <path class="winner" marker-end="url(#arrowGreen)" d="M1059 289 H1100"/>
+          <!-- PF winners to GF -->
+          <path d="M 864 200 H 918 V 342 H 1007" />
+          <path d="M 864 444 H 918 V 342 H 1007" />
+          <path d="M 1195 342 H 1252" />
         </g>
 
-        <!-- Route labels -->
-        <g class="route-labels">
-          <g transform="translate(357 82)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(365 143)"><circle class="lose-dot" r="12"/><text y="5">L</text></g>
-          <g transform="translate(357 236)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(357 370)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(365 454)"><circle class="lose-dot" r="12"/><text y="5">L</text></g>
-          <g transform="translate(357 522)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(592 226)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(592 372)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(872 113)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(872 471)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
-          <g transform="translate(1092 289)"><circle class="win-dot" r="12"/><text y="5">W</text></g>
+        <!-- Junctions -->
+        <g class="junctions">
+          <circle cx="282" cy="224" r="12"/><circle cx="282" cy="492" r="12"/>
+          <circle cx="600" cy="178" r="12"/><circle cx="600" cy="422" r="12"/>
+          <circle cx="600" cy="466" r="12"/><circle cx="600" cy="222" r="12"/>
+          <circle cx="918" cy="342" r="12"/><circle cx="1252" cy="342" r="12"/>
         </g>
 
+        <!-- Week 1 seed cards -->
         <g id="week1"></g>
 
+        <!-- Match boxes -->
         <g id="laterMatches">
-          <g class="match" transform="translate(424 166)" data-match="sf1">
-            <rect width="136" height="120" rx="4"/>
-            <text class="match-title" x="68" y="20" text-anchor="middle">SEMI FINAL 1</text>
-            <g class="slot" transform="translate(10 38)"><rect width="116" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="108" y="18" text-anchor="end">—</text></g>
-            <g class="slot" transform="translate(10 72)"><rect width="116" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="108" y="18" text-anchor="end">—</text></g>
-          </g>
-          <g class="match" transform="translate(424 326)" data-match="sf2">
-            <rect width="136" height="120" rx="4"/>
-            <text class="match-title" x="68" y="20" text-anchor="middle">SEMI FINAL 2</text>
-            <g class="slot" transform="translate(10 38)"><rect width="116" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="108" y="18" text-anchor="end">—</text></g>
-            <g class="slot" transform="translate(10 72)"><rect width="116" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="108" y="18" text-anchor="end">—</text></g>
-          </g>
-          <g class="match" transform="translate(656 64)" data-match="pf1">
-            <rect width="185" height="116" rx="4"/>
-            <text class="match-title" x="92.5" y="20" text-anchor="middle">PRELIMINARY FINAL 1</text>
-            <g class="slot" transform="translate(10 38)"><rect width="165" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="156" y="18" text-anchor="end">—</text></g>
-            <g class="slot" transform="translate(10 72)"><rect width="165" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="156" y="18" text-anchor="end">—</text></g>
-          </g>
-          <g class="match" transform="translate(660 438)" data-match="pf2">
-            <rect width="186" height="116" rx="4"/>
-            <text class="match-title" x="93" y="20" text-anchor="middle">PRELIMINARY FINAL 2</text>
-            <g class="slot" transform="translate(10 38)"><rect width="166" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="157" y="18" text-anchor="end">—</text></g>
-            <g class="slot" transform="translate(10 72)"><rect width="166" height="28" rx="2"/><text class="slot-team" x="42" y="18">TBD</text><text class="slot-score" x="157" y="18" text-anchor="end">—</text></g>
-          </g>
-          <g class="match grand" transform="translate(932 236)" data-match="gf">
-            <rect width="127" height="108" rx="4"/>
-            <text class="match-title" x="63.5" y="20" text-anchor="middle">GRAND FINAL</text>
-            <g class="slot" transform="translate(10 38)"><rect width="107" height="26" rx="2"/><text class="slot-team" x="40" y="17">TBD</text><text class="slot-score" x="99" y="17" text-anchor="end">—</text></g>
-            <g class="slot" transform="translate(10 70)"><rect width="107" height="26" rx="2"/><text class="slot-team" x="40" y="17">TBD</text><text class="slot-score" x="99" y="17" text-anchor="end">—</text></g>
-          </g>
+          <g class="match" transform="translate(360 185)" data-match="sf1"><rect width="188" height="78" rx="5"/><text class="match-title" x="12" y="19">SEMI FINAL 1</text><g class="slot" transform="translate(10 30)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g><g class="slot" transform="translate(10 53)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g></g>
+          <g class="match" transform="translate(360 453)" data-match="sf2"><rect width="188" height="78" rx="5"/><text class="match-title" x="12" y="19">SEMI FINAL 2</text><g class="slot" transform="translate(10 30)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g><g class="slot" transform="translate(10 53)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g></g>
+          <g class="match" transform="translate(676 139)" data-match="pf1"><rect width="188" height="78" rx="5"/><text class="match-title" x="12" y="19">PRELIMINARY FINAL 1</text><g class="slot" transform="translate(10 30)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g><g class="slot" transform="translate(10 53)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g></g>
+          <g class="match" transform="translate(676 405)" data-match="pf2"><rect width="188" height="78" rx="5"/><text class="match-title" x="12" y="19">PRELIMINARY FINAL 2</text><g class="slot" transform="translate(10 30)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g><g class="slot" transform="translate(10 53)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g></g>
+          <g class="match grand" transform="translate(1007 303)" data-match="gf"><rect width="188" height="78" rx="5"/><text class="match-title" x="12" y="19">GRAND FINAL</text><g class="slot" transform="translate(10 30)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g><g class="slot" transform="translate(10 53)"><rect width="168" height="20" rx="3"/><text class="slot-team" x="30" y="14">TBD</text><text class="slot-score" x="158" y="14" text-anchor="end">—</text></g></g>
         </g>
 
-        <text id="meta" class="meta" x="1098" y="624" text-anchor="end">ROUND 19 · LADDER</text>
+        <g class="legend" transform="translate(36 690)"><text>TOP 4 WIN → SKIP WEEK 2</text><text x="258">TOP 4 LOSE → WEEK 2</text><text x="508">5–8 LOSE → OUT</text><text id="updated" x="1204" text-anchor="end">MANUAL SNAPSHOT</text></g>
       </svg>
     </section>
   </main>
-
-  <script src="app.js?v=exact-map-1"></script>
+  <script src="app.js?v=official-map-1"></script>
 </body>
 </html>
