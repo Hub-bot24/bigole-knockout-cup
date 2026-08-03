@@ -1,18 +1,18 @@
 const seedGroups=[[1,4],[5,8],[6,7],[2,3]];
 const groupX=[170,470,770,1070];
 const groupTitles=['QUALIFYING FINAL 1','ELIMINATION FINAL 1','ELIMINATION FINAL 2','QUALIFYING FINAL 2'];
-const cardY=650, cardW=150, cardH=74, cardGap=8;
+const cardY=650, cardW=130, cardH=74, cardGap=6;
 
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
 function makeSeedCard(team,seed,x,y){
   return `<g class="seed-card" transform="translate(${x} ${y})">
-    <rect class="seed-box" width="34" height="${cardH}" rx="4"/>
-    <rect class="team-box" x="34" width="${cardW-34}" height="${cardH}" rx="4"/>
-    <text class="seed-num" x="17" y="${cardH/2+7}" text-anchor="middle">${seed}</text>
-    <text class="team-name" x="42" y="25">${esc(team.team)}</text>
-    <text class="coach" x="42" y="40">${esc(team.coach)}</text>
-    <text class="points" x="${cardW-8}" y="61" text-anchor="end">${team.leaguePoints ?? 0}<tspan class="pts" dx="3">PTS</tspan></text>
+    <rect class="seed-box" width="32" height="${cardH}" rx="4"/>
+    <rect class="team-box" x="32" width="${cardW-32}" height="${cardH}" rx="4"/>
+    <text class="seed-num" x="16" y="${cardH/2+7}" text-anchor="middle">${seed}</text>
+    <text class="team-name" x="40" y="24">${esc(team.team)}</text>
+    <text class="coach" x="40" y="39">${esc(team.coach)}</text>
+    <text class="points" x="${cardW-8}" y="60" text-anchor="end">${team.leaguePoints ?? 0}<tspan class="pts" dx="3">PTS</tspan></text>
   </g>`;
 }
 
@@ -23,6 +23,7 @@ function buildFirstRound(sorted){
     const cx=groupX[gi];
     const leftX=cx-pairWidth/2;
     const rightX=leftX+cardW+cardGap;
+    out+=`<rect class="group-box" x="${leftX-6}" y="${cardY-6}" width="${pairWidth+12}" height="${cardH+12}" rx="6"/>`;
     out+=makeSeedCard(sorted[pair[0]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[0],leftX,cardY);
     out+=makeSeedCard(sorted[pair[1]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[1],rightX,cardY);
     out+=`<text class="group-title" x="${cx}" y="${cardY+cardH+22}" text-anchor="middle">${groupTitles[gi]}</text>`;
