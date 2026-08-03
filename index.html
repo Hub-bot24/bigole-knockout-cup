@@ -34,20 +34,20 @@
         <!-- official-style route geometry -->
         <g class="routes">
           <!-- QF1 winner bypass to PF1 (home slot) -->
-          <path d="M 240 150 H 600 V 179 H 676" />
+          <path class="winner" d="M 240 150 H 600 V 179 H 676" />
           <!-- QF1 loser to SF1 (home slot) -->
-          <path d="M 240 150 H 282 V 225 H 360" />
+          <path class="loser" d="M 240 150 H 282 V 225 H 360" />
           <!-- EF1 winner to SF1 (away slot) -->
-          <path d="M 240 264 H 282 V 248 H 360" />
+          <path class="winner" d="M 240 264 H 282 V 248 H 360" />
           <!-- SF1 winner to PF2 (home slot) - crosses over -->
           <path class="crossover" d="M 548 224 H 580 L 644 445 H 676" />
 
           <!-- EF2 winner to SF2 (home slot) -->
-          <path d="M 240 378 H 282 V 493 H 360" />
+          <path class="winner" d="M 240 378 H 282 V 493 H 360" />
           <!-- QF2 loser to SF2 (away slot) -->
-          <path d="M 240 606 H 282 V 516 H 360" />
+          <path class="loser" d="M 240 606 H 282 V 516 H 360" />
           <!-- QF2 winner bypass to PF2 (away slot) -->
-          <path d="M 240 606 H 600 V 468 H 676" />
+          <path class="winner" d="M 240 606 H 600 V 468 H 676" />
           <!-- SF2 winner to PF1 (away slot) - crosses over -->
           <path class="crossover" d="M 548 492 H 580 L 644 202 H 676" />
 
@@ -55,6 +55,16 @@
           <path d="M 864 200 H 918 V 343 H 1007" />
           <path d="M 864 444 H 918 V 366 H 1007" />
           <path d="M 1195 342 H 1252" />
+        </g>
+
+        <!-- Winner/loser labels, placed on each route's final approach into its slot -->
+        <g class="route-labels">
+          <text x="300" y="146">WINNER</text>
+          <text x="300" y="219">LOSER</text>
+          <text x="300" y="242">WINNER</text>
+          <text x="300" y="487">WINNER</text>
+          <text x="300" y="510">LOSER</text>
+          <text x="300" y="602">WINNER</text>
         </g>
 
         <!-- Junctions -->

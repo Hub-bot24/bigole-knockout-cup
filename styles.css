@@ -18,7 +18,9 @@ body{display:grid;place-items:center}
 .sub{fill:#79c60c;font-size:10px;font-weight:700;letter-spacing:1px}
 
 .routes path{fill:none;stroke:#79c60c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.routes path.loser{stroke:#5f7a56;stroke-dasharray:2 5}
 .routes path.crossover{stroke:#f7e600}
+.route-labels text{fill:#6d8b76;font-size:9px;font-weight:900;letter-spacing:1px}
 .junctions circle{fill:#101a16;stroke:#79c60c;stroke-width:2}
 
 .seed-card .seed-box{fill:url(#card);stroke:#2c3a35;stroke-width:1.4}
