@@ -33,36 +33,47 @@
 
         <!-- official-style route geometry -->
         <g class="routes">
-          <!-- QF1 winner bypass to PF1 -->
-          <path d="M 240 150 H 600 V 178 H 676" />
-          <!-- QF1 loser to SF1 -->
-          <path d="M 240 150 H 282 V 224 H 360" />
-          <!-- EF1 winner to SF1 -->
-          <path d="M 240 264 H 282 V 224 H 360" />
-          <!-- SF1 winner to PF2 -->
-          <path d="M 548 224 H 600 V 422 H 676" />
+          <!-- QF1 winner bypass to PF1 (home slot) -->
+          <path class="winner" d="M 240 150 H 600 V 179 H 676" />
+          <!-- QF1 loser to SF1 (home slot) -->
+          <path class="loser" d="M 240 150 H 282 V 225 H 360" />
+          <!-- EF1 winner to SF1 (away slot) -->
+          <path class="winner" d="M 240 264 H 282 V 248 H 360" />
+          <!-- SF1 winner to PF2 (home slot) - crosses over -->
+          <path class="crossover" d="M 548 224 H 580 L 644 445 H 676" />
 
-          <!-- EF2 winner to SF2 -->
-          <path d="M 240 378 H 282 V 492 H 360" />
-          <!-- QF2 loser to SF2 -->
-          <path d="M 240 606 H 282 V 492 H 360" />
-          <!-- QF2 winner bypass to PF2 -->
-          <path d="M 240 606 H 600 V 466 H 676" />
-          <!-- SF2 winner to PF1 -->
-          <path d="M 548 492 H 600 V 222 H 676" />
+          <!-- EF2 winner to SF2 (home slot) -->
+          <path class="winner" d="M 240 378 H 282 V 493 H 360" />
+          <!-- QF2 loser to SF2 (away slot) -->
+          <path class="loser" d="M 240 606 H 282 V 516 H 360" />
+          <!-- QF2 winner bypass to PF2 (away slot) -->
+          <path class="winner" d="M 240 606 H 600 V 468 H 676" />
+          <!-- SF2 winner to PF1 (away slot) - crosses over -->
+          <path class="crossover" d="M 548 492 H 580 L 644 202 H 676" />
 
           <!-- PF winners to GF -->
-          <path d="M 864 200 H 918 V 342 H 1007" />
-          <path d="M 864 444 H 918 V 342 H 1007" />
+          <path d="M 864 200 H 918 V 343 H 1007" />
+          <path d="M 864 444 H 918 V 366 H 1007" />
           <path d="M 1195 342 H 1252" />
+        </g>
+
+        <!-- Winner/loser labels, placed on each route's final approach into its slot -->
+        <g class="route-labels">
+          <text x="300" y="146">WINNER</text>
+          <text x="300" y="219">LOSER</text>
+          <text x="300" y="242">WINNER</text>
+          <text x="300" y="487">WINNER</text>
+          <text x="300" y="510">LOSER</text>
+          <text x="300" y="602">WINNER</text>
         </g>
 
         <!-- Junctions -->
         <g class="junctions">
-          <circle cx="282" cy="224" r="12"/><circle cx="282" cy="492" r="12"/>
-          <circle cx="600" cy="178" r="12"/><circle cx="600" cy="422" r="12"/>
-          <circle cx="600" cy="466" r="12"/><circle cx="600" cy="222" r="12"/>
-          <circle cx="918" cy="342" r="12"/><circle cx="1252" cy="342" r="12"/>
+          <circle cx="282" cy="225" r="12"/><circle cx="282" cy="248" r="12"/>
+          <circle cx="282" cy="493" r="12"/><circle cx="282" cy="516" r="12"/>
+          <circle cx="600" cy="179" r="12"/><circle cx="600" cy="468" r="12"/>
+          <circle cx="918" cy="343" r="12"/><circle cx="918" cy="366" r="12"/>
+          <circle cx="1252" cy="342" r="12"/>
         </g>
 
         <!-- Week 1 seed cards -->

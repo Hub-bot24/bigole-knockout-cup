@@ -1,73 +1,73 @@
 {
-  "phase": "regular",
-  "round": 19,
-  "roundsUntilFinals": 3,
+  "phase": "finals",
+  "round": 23,
+  "roundsUntilFinals": 0,
   "excludedCoach": "Tim",
-  "updatedAt": "2026-07-15T03:07:00+10:00",
+  "updatedAt": "2026-08-03T00:00:00+10:00",
   "sourceStatus": "manual_snapshot",
   "standings": [
     {
       "team": "Cooma Stallions",
       "coach": "Tim",
-      "leaguePoints": 34,
-      "totalPoints": 24554,
-      "roundScore": 0
+      "leaguePoints": 38,
+      "totalPoints": 28700,
+      "roundScore": 1522
     },
     {
       "team": "BIGOLE",
       "coach": "Joel",
-      "leaguePoints": 30,
-      "totalPoints": 25105,
-      "roundScore": 0
+      "leaguePoints": 34,
+      "totalPoints": 29537,
+      "roundScore": 1605
     },
     {
       "team": "Multch’s Magoo’s",
       "coach": "Mitch",
-      "leaguePoints": 28,
-      "totalPoints": 24658,
-      "roundScore": 0
+      "leaguePoints": 34,
+      "totalPoints": 28982,
+      "roundScore": 1643
     },
     {
       "team": "Ballbags",
       "coach": "Hayden",
-      "leaguePoints": 28,
-      "totalPoints": 24035,
-      "roundScore": 0
+      "leaguePoints": 34,
+      "totalPoints": 28303,
+      "roundScore": 1555
     },
     {
       "team": "The amateurs",
       "coach": "Jhai",
-      "leaguePoints": 26,
-      "totalPoints": 24262,
-      "roundScore": 0
+      "leaguePoints": 28,
+      "totalPoints": 28456,
+      "roundScore": 1735
     },
     {
       "team": "I love Herbie",
       "coach": "Blake",
-      "leaguePoints": 26,
-      "totalPoints": 23476,
-      "roundScore": 0
+      "leaguePoints": 30,
+      "totalPoints": 27805,
+      "roundScore": 1572
     },
     {
       "team": "Bonogin Brawlers",
       "coach": "Matt",
-      "leaguePoints": 24,
-      "totalPoints": 23332,
-      "roundScore": 0
+      "leaguePoints": 28,
+      "totalPoints": 27661,
+      "roundScore": 1665
     },
     {
       "team": "BARRY",
       "coach": "Kyle",
-      "leaguePoints": 22,
-      "totalPoints": 23788,
-      "roundScore": 0
+      "leaguePoints": 24,
+      "totalPoints": 28107,
+      "roundScore": 1540
     },
     {
       "team": "Bridgette",
       "coach": "Bridgette",
-      "leaguePoints": 20,
-      "totalPoints": 23046,
-      "roundScore": 0
+      "leaguePoints": 26,
+      "totalPoints": 27667,
+      "roundScore": 1661
     }
   ],
   "finals": {
@@ -80,18 +80,18 @@
           "score": null
         },
         "away": {
-          "team": "The amateurs",
+          "team": "I love Herbie",
           "score": null
         }
       },
       "ef1": {
         "status": "WAITING",
         "home": {
-          "team": "I love Herbie",
+          "team": "The amateurs",
           "score": null
         },
         "away": {
-          "team": "Bridgette",
+          "team": "BARRY",
           "score": null
         }
       },
@@ -102,7 +102,7 @@
           "score": null
         },
         "away": {
-          "team": "BARRY",
+          "team": "Bridgette",
           "score": null
         }
       },
