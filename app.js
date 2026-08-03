@@ -1,19 +1,33 @@
-const seedOrder=[1,4,5,8,6,7,2,3];
-const cardYs=[46,112,180,246,316,382,450,516];
-const vsYs=[108,240,374,510];
+const seedGroups=[[1,4],[5,8],[6,7],[2,3]];
+const groupX=[170,470,770,1070];
+const groupTitles=['QUALIFYING FINAL 1','ELIMINATION FINAL 1','ELIMINATION FINAL 2','QUALIFYING FINAL 2'];
+const cardY=650, cardW=150, cardH=74, cardGap=8;
 
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
-function makeSeedCard(team,seed,y){
-  return `<g class="seed-card" transform="translate(14 ${y})">
-    <rect class="seed-box" width="46" height="54" rx="4"/>
-    <rect class="team-box" x="46" width="194" height="54" rx="4"/>
-    <text class="seed-num" x="23" y="35" text-anchor="middle">${seed}</text>
-    <text class="team-name" x="58" y="22">${esc(team.team)}</text>
-    <text class="coach" x="58" y="41">${esc(team.coach)}</text>
-    <text class="points" x="217" y="31" text-anchor="end">${team.leaguePoints ?? 0}</text>
-    <text class="pts" x="231" y="31" text-anchor="end">PTS</text>
+function makeSeedCard(team,seed,x,y){
+  return `<g class="seed-card" transform="translate(${x} ${y})">
+    <rect class="seed-box" width="34" height="${cardH}" rx="4"/>
+    <rect class="team-box" x="34" width="${cardW-34}" height="${cardH}" rx="4"/>
+    <text class="seed-num" x="17" y="${cardH/2+7}" text-anchor="middle">${seed}</text>
+    <text class="team-name" x="42" y="25">${esc(team.team)}</text>
+    <text class="coach" x="42" y="40">${esc(team.coach)}</text>
+    <text class="points" x="${cardW-8}" y="61" text-anchor="end">${team.leaguePoints ?? 0}<tspan class="pts" dx="3">PTS</tspan></text>
   </g>`;
+}
+
+function buildFirstRound(sorted){
+  const pairWidth=cardW*2+cardGap;
+  let out='';
+  seedGroups.forEach((pair,gi)=>{
+    const cx=groupX[gi];
+    const leftX=cx-pairWidth/2;
+    const rightX=leftX+cardW+cardGap;
+    out+=makeSeedCard(sorted[pair[0]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[0],leftX,cardY);
+    out+=makeSeedCard(sorted[pair[1]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[1],rightX,cardY);
+    out+=`<text class="group-title" x="${cx}" y="${cardY+cardH+22}" text-anchor="middle">${groupTitles[gi]}</text>`;
+  });
+  return out;
 }
 
 function setSlot(matchKey,index,data){
@@ -39,9 +53,7 @@ async function load(){
     .sort((a,b)=>(b.leaguePoints-a.leaguePoints)||(b.totalPoints-a.totalPoints))
     .slice(0,8);
 
-  const cards=seedOrder.map((seed,i)=>makeSeedCard(sorted[seed-1]||{team:'TBD',coach:'',leaguePoints:0},seed,cardYs[i])).join('');
-  const vs=vsYs.map(y=>`<text class="vs" x="134" y="${y}">VS</text>`).join('');
-  document.getElementById('week1').innerHTML=cards+vs;
+  document.getElementById('week1').innerHTML=buildFirstRound(sorted);
 
   document.getElementById('meta').textContent=`ROUND ${d.round ?? '—'} · ${String(d.phase||'regular').toUpperCase()}`;
   const matches=d.finals?.matches||{};
