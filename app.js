@@ -1,7 +1,7 @@
 const seedGroups=[[1,4],[5,8],[6,7],[2,3]];
 const groupX=[170,470,770,1070];
 const groupTitles=['QUALIFYING FINAL 1','ELIMINATION FINAL 1','ELIMINATION FINAL 2','QUALIFYING FINAL 2'];
-const cardY=650, cardW=130, cardH=74, cardGap=6;
+const cardY=650, cardW=130, cardH=74, cardGap=22;
 
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
@@ -26,6 +26,7 @@ function buildFirstRound(sorted){
     out+=`<rect class="group-box" x="${leftX-6}" y="${cardY-6}" width="${pairWidth+12}" height="${cardH+12}" rx="6"/>`;
     out+=makeSeedCard(sorted[pair[0]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[0],leftX,cardY);
     out+=makeSeedCard(sorted[pair[1]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[1],rightX,cardY);
+    out+=`<text class="vs" x="${cx}" y="${cardY+cardH/2+4}" text-anchor="middle">VS</text>`;
     out+=`<text class="group-title" x="${cx}" y="${cardY+cardH+22}" text-anchor="middle">${groupTitles[gi]}</text>`;
   });
   return out;
