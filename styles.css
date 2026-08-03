@@ -27,6 +27,7 @@ body{display:grid;place-items:center}
 .entries circle.loser{fill:#e8963c}
 
 .vs{fill:#4b5f56;font-size:14px;font-weight:900;text-anchor:middle}
+.tie-bracket{fill:none;stroke:#c7d4c9;stroke-width:2.5;stroke-linejoin:round}
 
 .seed-card .seed-box{fill:url(#card);stroke:#2c3a35;stroke-width:1.4}
 .seed-card .team-box{fill:#0d1512;stroke:#2c3a35;stroke-width:1.4}

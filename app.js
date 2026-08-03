@@ -23,6 +23,8 @@ function buildFirstRound(sorted){
     const cx=groupX[gi];
     const leftX=cx-pairWidth/2;
     const rightX=leftX+cardW+cardGap;
+    const leftCenter=leftX+cardW/2, rightCenter=rightX+cardW/2;
+    out+=`<path class="tie-bracket" d="M ${leftCenter} ${cardY} V ${cardY-18} H ${rightCenter} V ${cardY}"/>`;
     out+=`<rect class="group-box" x="${leftX-6}" y="${cardY-6}" width="${pairWidth+12}" height="${cardH+12}" rx="6"/>`;
     out+=makeSeedCard(sorted[pair[0]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[0],leftX,cardY);
     out+=makeSeedCard(sorted[pair[1]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[1],rightX,cardY);
