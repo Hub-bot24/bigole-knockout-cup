@@ -39,8 +39,8 @@
           <path d="M 240 150 H 282 V 225 H 360" />
           <!-- EF1 winner to SF1 (away slot) -->
           <path d="M 240 264 H 282 V 248 H 360" />
-          <!-- SF1 winner to PF2 (home slot) -->
-          <path d="M 548 224 H 600 V 445 H 676" />
+          <!-- SF1 winner to PF2 (home slot) - crosses over -->
+          <path class="crossover" d="M 548 224 H 580 L 644 445 H 676" />
 
           <!-- EF2 winner to SF2 (home slot) -->
           <path d="M 240 378 H 282 V 493 H 360" />
@@ -48,8 +48,8 @@
           <path d="M 240 606 H 282 V 516 H 360" />
           <!-- QF2 winner bypass to PF2 (away slot) -->
           <path d="M 240 606 H 600 V 468 H 676" />
-          <!-- SF2 winner to PF1 (away slot) -->
-          <path d="M 548 492 H 600 V 202 H 676" />
+          <!-- SF2 winner to PF1 (away slot) - crosses over -->
+          <path class="crossover" d="M 548 492 H 580 L 644 202 H 676" />
 
           <!-- PF winners to GF -->
           <path d="M 864 200 H 918 V 343 H 1007" />
@@ -62,7 +62,6 @@
           <circle cx="282" cy="225" r="12"/><circle cx="282" cy="248" r="12"/>
           <circle cx="282" cy="493" r="12"/><circle cx="282" cy="516" r="12"/>
           <circle cx="600" cy="179" r="12"/><circle cx="600" cy="468" r="12"/>
-          <circle cx="600" cy="445" r="12"/><circle cx="600" cy="202" r="12"/>
           <circle cx="918" cy="343" r="12"/><circle cx="918" cy="366" r="12"/>
           <circle cx="1252" cy="342" r="12"/>
         </g>
