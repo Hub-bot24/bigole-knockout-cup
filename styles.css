@@ -17,17 +17,17 @@ body{display:grid;place-items:center}
 .group-box{fill:none;stroke:#3a4a43;stroke-width:1.4;stroke-dasharray:3 4}
 
 .routes path{fill:none;stroke:#79c60c;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
-.routes path.loser{stroke:#e8963c;stroke-dasharray:7 5;stroke-width:3.5}
-.routes path.crossover{stroke:#f7e600}
+.routes path.loser{stroke:#f7e600;stroke-dasharray:7 5;stroke-width:3.5}
+.routes path.crossover{stroke:#79c60c}
 .route-labels text{fill:#c7d4c9;font-size:10px;font-weight:900;letter-spacing:1px}
 
 .junctions circle{fill:#101a16;stroke:#79c60c;stroke-width:2}
 .junctions circle.champion{fill:#f7e600;stroke:#f7e600;filter:url(#glow)}
 .entries circle{fill:#79c60c;stroke:#0a1210;stroke-width:2}
-.entries circle.loser{fill:#e8963c}
+.entries circle.loser{fill:#f7e600}
 
 .vs{fill:#4b5f56;font-size:14px;font-weight:900;text-anchor:middle}
-.tie-bracket{fill:none;stroke:#c7d4c9;stroke-width:2.5;stroke-linejoin:round}
+.tie-bracket{fill:none;stroke:#79c60c;stroke-width:2.5;stroke-linejoin:round}
 
 .seed-card .seed-box{fill:url(#card);stroke:#2c3a35;stroke-width:1.4}
 .seed-card .team-box{fill:#0d1512;stroke:#2c3a35;stroke-width:1.4}
