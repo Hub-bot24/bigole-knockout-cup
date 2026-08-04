@@ -3,35 +3,39 @@
 html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#0a1210}
 body{display:grid;place-items:center}
 #viewport{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;background:#0a1210}
-#stage{width:min(100vw,calc(100vh * 1.777778));height:min(100vh,calc(100vw / 1.777778));display:block}
+#stage{width:min(100vw,calc(100vh * 1.377778));height:min(100vh,calc(100vw / 1.377778));display:block}
 #bracket{width:100%;height:100%;display:block}
 
 .bg{fill:url(#panel)}
-.top-line{fill:#8bd316}
+.banner{fill:#0d1512;stroke:#79c60c;stroke-width:1.4}
 
-.kicker{fill:#8bd316;font-size:15px;font-weight:900;letter-spacing:2px}
+.kicker{fill:#8bd316;font-size:19px;font-weight:900;letter-spacing:1.5px}
 .status-dot{fill:#78d10d;filter:url(#glow)}
-.heading{fill:#f3f5f2;font-size:19px;font-weight:900;letter-spacing:1.5px}
 .meta{fill:#91a095;font-size:11px;font-weight:700;letter-spacing:1px}
 
-.week{fill:#f3f5f2;font-size:13px;font-weight:900;letter-spacing:1.5px}
-.sub{fill:#79c60c;font-size:10px;font-weight:700;letter-spacing:1px}
+.group-title{fill:#79c60c;font-size:11px;font-weight:900;letter-spacing:.5px}
+.group-box{fill:none;stroke:#3a4a43;stroke-width:1.4;stroke-dasharray:3 4}
 
-.routes path{fill:none;stroke:#79c60c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
-.routes path.loser{stroke:#5f7a56;stroke-dasharray:2 5}
-.routes path.crossover{stroke:#f7e600}
-.route-labels text{fill:#6d8b76;font-size:9px;font-weight:900;letter-spacing:1px}
+.routes path{fill:none;stroke:#79c60c;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.routes path.loser{stroke:#f7e600;stroke-dasharray:7 5;stroke-width:3.5}
+.routes path.crossover{stroke:#79c60c}
+.route-labels text{fill:#c7d4c9;font-size:10px;font-weight:900;letter-spacing:1px}
+
 .junctions circle{fill:#101a16;stroke:#79c60c;stroke-width:2}
+.junctions circle.champion{fill:#f7e600;stroke:#f7e600;filter:url(#glow)}
+.entries circle{fill:#79c60c;stroke:#0a1210;stroke-width:2}
+.entries circle.loser{fill:#f7e600}
+
+.vs{fill:#4b5f56;font-size:14px;font-weight:900;text-anchor:middle}
+.tie-bracket{fill:none;stroke:#79c60c;stroke-width:2.5;stroke-linejoin:round}
 
 .seed-card .seed-box{fill:url(#card);stroke:#2c3a35;stroke-width:1.4}
 .seed-card .team-box{fill:#0d1512;stroke:#2c3a35;stroke-width:1.4}
-.seed-card .seed-num{fill:#182008;font-weight:900;font-size:22px}
-.seed-card .team-name{fill:#fff;font-weight:900;font-size:18px}
-.seed-card .coach{fill:#9aa79f;font-size:12px}
-.seed-card .points{fill:#8bd316;font-weight:900;font-size:20px}
-.seed-card .pts{fill:#6d8b23;font-size:10px;font-weight:900}
-
-.vs{fill:#4b5f56;font-size:15px;font-weight:900;text-anchor:middle}
+.seed-card .seed-num{fill:#182008;font-weight:900;font-size:18px}
+.seed-card .team-name{fill:#fff;font-weight:900;font-size:11px}
+.seed-card .coach{fill:#9aa79f;font-size:9px}
+.seed-card .points{fill:#8bd316;font-weight:900;font-size:14px}
+.seed-card .points .pts{fill:#6d8b23;font-size:8px;font-weight:900}
 
 .match>rect{fill:#0d1512;stroke:#2c3a35;stroke-width:1.4}
 .match.grand>rect{stroke:#f7e600;stroke-width:2}
@@ -43,9 +47,3 @@ body{display:grid;place-items:center}
 
 .legend text{fill:#5b6d64;font-size:10px;font-weight:700;letter-spacing:.5px}
 #updated{fill:#79c60c}
-
-#rotateGate{display:none;position:fixed;inset:0;z-index:50;background:#0a1210;color:white;place-items:center;text-align:center}
-#rotateGate>div{display:grid;gap:9px}
-.phone{font-size:42px;color:#8bd316}
-#rotateGate span{color:#aeb8b1;font-size:14px}
-@media (orientation:portrait) and (max-width:900px){#rotateGate{display:grid}#viewport{visibility:hidden}}
