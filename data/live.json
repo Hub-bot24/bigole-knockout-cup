@@ -116,6 +116,51 @@
           "team": "Ballbags",
           "score": null
         }
+      },
+      "sf1": {
+        "status": "WAITING",
+        "home": {
+          "score": null
+        },
+        "away": {
+          "score": null
+        }
+      },
+      "sf2": {
+        "status": "WAITING",
+        "home": {
+          "score": null
+        },
+        "away": {
+          "score": null
+        }
+      },
+      "pf1": {
+        "status": "WAITING",
+        "home": {
+          "score": null
+        },
+        "away": {
+          "score": null
+        }
+      },
+      "pf2": {
+        "status": "WAITING",
+        "home": {
+          "score": null
+        },
+        "away": {
+          "score": null
+        }
+      },
+      "gf": {
+        "status": "WAITING",
+        "home": {
+          "score": null
+        },
+        "away": {
+          "score": null
+        }
       }
     }
   },
