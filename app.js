@@ -41,10 +41,37 @@ function setSlot(matchKey,index,data){
   slot.querySelector('.slot-score').textContent=Number.isFinite(data?.score)?data.score:'—';
 }
 
-function normaliseMatch(m){
-  if(!m)return [null,null];
-  if(Array.isArray(m.teams)) return m.teams.map(x=>({team:x.team||x.name,score:x.roundScore??x.score}));
-  return [m.home,m.away].map(x=>x?({team:x.team||x.name,score:x.roundScore??x.score}):null);
+// Winner/loser of a single {home:{team,score},away:{team,score}} match, or nulls if not yet decided.
+function outcome(match){
+  const h=match?.home, a=match?.away;
+  if(!h||!a||!Number.isFinite(h.score)||!Number.isFinite(a.score)||h.score===a.score){
+    return {winner:null,loser:null};
+  }
+  return h.score>a.score
+    ? {winner:{team:h.team},loser:{team:a.team}}
+    : {winner:{team:a.team},loser:{team:h.team}};
+}
+
+function slotFor(source,recorded){
+  return source?{team:source.team,score:recorded?.score}:null;
+}
+
+// Cascades qf1/ef1/ef2/qf2 results up through sf1/sf2 (same side) into pf1/pf2
+// (crossover: qf1 winner + sf2 winner -> pf1, sf1 winner + qf2 winner -> pf2) and gf.
+function buildBracket(m){
+  const qf1=outcome(m.qf1), ef1=outcome(m.ef1), ef2=outcome(m.ef2), qf2=outcome(m.qf2);
+
+  const sf1={home:slotFor(qf1.loser,m.sf1?.home), away:slotFor(ef1.winner,m.sf1?.away)};
+  const sf2={home:slotFor(ef2.winner,m.sf2?.home), away:slotFor(qf2.loser,m.sf2?.away)};
+  const sf1Out=outcome(sf1), sf2Out=outcome(sf2);
+
+  const pf1={home:slotFor(qf1.winner,m.pf1?.home), away:slotFor(sf2Out.winner,m.pf1?.away)};
+  const pf2={home:slotFor(sf1Out.winner,m.pf2?.home), away:slotFor(qf2.winner,m.pf2?.away)};
+  const pf1Out=outcome(pf1), pf2Out=outcome(pf2);
+
+  const gf={home:slotFor(pf1Out.winner,m.gf?.home), away:slotFor(pf2Out.winner,m.gf?.away)};
+
+  return {sf1,sf2,pf1,pf2,gf};
 }
 
 async function load(){
@@ -61,10 +88,10 @@ async function load(){
 
   document.getElementById('meta').textContent=`ROUND ${d.round ?? '—'} · ${String(d.phase||'regular').toUpperCase()}`;
   const matches=d.finals?.matches||{};
+  const bracket=buildBracket(matches);
   for(const key of ['sf1','sf2','pf1','pf2','gf']){
-    const pair=normaliseMatch(matches[key]);
-    setSlot(key,0,pair[0]);
-    setSlot(key,1,pair[1]);
+    setSlot(key,0,bracket[key].home);
+    setSlot(key,1,bracket[key].away);
   }
 }
 
