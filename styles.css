@@ -45,6 +45,19 @@ body{min-height:100vh}
 .seed-card .coach{fill:#9aa79f;font-size:9px}
 .seed-card .points{fill:#8bd316;font-weight:900;font-size:14px}
 .seed-card .points .pts{fill:#6d8b23;font-size:8px;font-weight:900}
+.seed-card .score{fill:#fff;font-weight:900;font-size:18px}
+.seed-card .badge{font-size:8px;font-weight:900;letter-spacing:.4px;fill:#9aa79f}
+
+.seed-card.status-bye .team-box{stroke:#f7e600;stroke-width:2}
+.seed-card.status-bye .score{fill:#f7e600}
+.seed-card.status-bye .badge{fill:#f7e600}
+.seed-card.status-advance .team-box{stroke:#79c60c;stroke-width:2}
+.seed-card.status-advance .score{fill:#8bd316}
+.seed-card.status-advance .badge{fill:#79c60c}
+.seed-card.status-drop .badge{fill:#8ea3c2}
+.seed-card.status-eliminated{opacity:.55}
+.seed-card.status-eliminated .team-box{stroke:#ff4d4d}
+.seed-card.status-eliminated .badge{fill:#ff4d4d}
 
 .match>rect{fill:#0d1512;stroke:#2c3a35;stroke-width:1.4}
 .match.grand>rect{stroke:#f7e600;stroke-width:2}
