@@ -1,22 +1,42 @@
 const seedGroups=[[1,4],[5,8],[6,7],[2,3]];
 const groupX=[170,470,770,1070];
 const groupTitles=['QUALIFYING FINAL 1','ELIMINATION FINAL 1','ELIMINATION FINAL 2','QUALIFYING FINAL 2'];
-const cardY=650, cardW=130, cardH=74, cardGap=22;
+const matchKeys=['qf1','ef1','ef2','qf2'];
+const isQualifying=[true,false,false,true];
+const cardY=650, cardW=130, cardH=90, cardGap=22;
 
 function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
-function makeSeedCard(team,seed,x,y){
-  return `<g class="seed-card" transform="translate(${x} ${y})">
+// Badge/score for one side of a played first-round match; null if not yet played.
+function firstRoundResult(match,side,out,qualifying){
+  const slot=match?.[side];
+  if(!slot||!Number.isFinite(slot.score)) return null;
+  if(!out.winner) return {score:slot.score,badge:null};
+  const won=out.winner.team===slot.team;
+  const badge=won
+    ? (qualifying?{type:'bye',text:'BYE TO PRELIM'}:{type:'advance',text:'TO SEMI FINAL'})
+    : (qualifying?{type:'drop',text:'DROPS TO SEMI'}:{type:'eliminated',text:'ELIMINATED'});
+  return {score:slot.score,badge};
+}
+
+function makeSeedCard(team,seed,x,y,result){
+  const cardClass='seed-card'+(result?.badge?` status-${result.badge.type}`:'');
+  const scoreLine=result
+    ? `<text class="score" x="${cardW-8}" y="60" text-anchor="end">${result.score}</text>`
+    : `<text class="points" x="${cardW-8}" y="60" text-anchor="end">${team.leaguePoints ?? 0}<tspan class="pts" dx="3">PTS</tspan></text>`;
+  const badgeLine=result?.badge ? `<text class="badge" x="40" y="78">${result.badge.text}</text>` : '';
+  return `<g class="${cardClass}" transform="translate(${x} ${y})">
     <rect class="seed-box" width="32" height="${cardH}" rx="4"/>
     <rect class="team-box" x="32" width="${cardW-32}" height="${cardH}" rx="4"/>
     <text class="seed-num" x="16" y="${cardH/2+7}" text-anchor="middle">${seed}</text>
     <text class="team-name" x="40" y="24">${esc(team.team)}</text>
     <text class="coach" x="40" y="39">${esc(team.coach)}</text>
-    <text class="points" x="${cardW-8}" y="60" text-anchor="end">${team.leaguePoints ?? 0}<tspan class="pts" dx="3">PTS</tspan></text>
+    ${scoreLine}
+    ${badgeLine}
   </g>`;
 }
 
-function buildFirstRound(sorted){
+function buildFirstRound(sorted,matches){
   const pairWidth=cardW*2+cardGap;
   let out='';
   seedGroups.forEach((pair,gi)=>{
@@ -24,10 +44,12 @@ function buildFirstRound(sorted){
     const leftX=cx-pairWidth/2;
     const rightX=leftX+cardW+cardGap;
     const leftCenter=leftX+cardW/2, rightCenter=rightX+cardW/2;
+    const match=matches[matchKeys[gi]];
+    const matchOut=outcome(match);
     out+=`<path class="tie-bracket" d="M ${leftCenter} ${cardY} V ${cardY-18} H ${rightCenter} V ${cardY}"/>`;
     out+=`<rect class="group-box" x="${leftX-6}" y="${cardY-6}" width="${pairWidth+12}" height="${cardH+12}" rx="6"/>`;
-    out+=makeSeedCard(sorted[pair[0]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[0],leftX,cardY);
-    out+=makeSeedCard(sorted[pair[1]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[1],rightX,cardY);
+    out+=makeSeedCard(sorted[pair[0]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[0],leftX,cardY,firstRoundResult(match,'home',matchOut,isQualifying[gi]));
+    out+=makeSeedCard(sorted[pair[1]-1]||{team:'TBD',coach:'',leaguePoints:0},pair[1],rightX,cardY,firstRoundResult(match,'away',matchOut,isQualifying[gi]));
     out+=`<text class="vs" x="${cx}" y="${cardY+cardH/2+4}" text-anchor="middle">VS</text>`;
     out+=`<text class="group-title" x="${cx}" y="${cardY+cardH+22}" text-anchor="middle">${groupTitles[gi]}</text>`;
   });
@@ -84,10 +106,10 @@ async function load(){
     .sort((a,b)=>(b.leaguePoints-a.leaguePoints)||(b.totalPoints-a.totalPoints))
     .slice(0,8);
 
-  document.getElementById('week1').innerHTML=buildFirstRound(sorted);
+  const matches=d.finals?.matches||{};
+  document.getElementById('week1').innerHTML=buildFirstRound(sorted,matches);
 
   document.getElementById('meta').textContent=`ROUND ${d.round ?? '—'} · ${String(d.phase||'regular').toUpperCase()}`;
-  const matches=d.finals?.matches||{};
   const bracket=buildBracket(matches);
   for(const key of ['sf1','sf2','pf1','pf2','gf']){
     setSlot(key,0,bracket[key].home);

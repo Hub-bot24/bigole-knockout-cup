@@ -3,7 +3,7 @@
   "round": 23,
   "roundsUntilFinals": 0,
   "excludedCoach": "Tim",
-  "updatedAt": "2026-08-03T00:00:00+10:00",
+  "updatedAt": "2026-08-05T00:00:00+10:00",
   "sourceStatus": "manual_snapshot",
   "standings": [
     {
@@ -74,47 +74,47 @@
     "week": 0,
     "matches": {
       "qf1": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
           "team": "BIGOLE",
-          "score": null
+          "score": 1411
         },
         "away": {
           "team": "I love Herbie",
-          "score": null
+          "score": 1332
         }
       },
       "ef1": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
           "team": "The amateurs",
-          "score": null
+          "score": 1447
         },
         "away": {
           "team": "BARRY",
-          "score": null
+          "score": 1268
         }
       },
       "ef2": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
           "team": "Bonogin Brawlers",
-          "score": null
+          "score": 1377
         },
         "away": {
           "team": "Bridgette",
-          "score": null
+          "score": 1292
         }
       },
       "qf2": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
           "team": "Multch’s Magoo’s",
-          "score": null
+          "score": 1354
         },
         "away": {
           "team": "Ballbags",
-          "score": null
+          "score": 1407
         }
       },
       "sf1": {
