@@ -56,11 +56,18 @@ function buildFirstRound(sorted,matches){
   return out;
 }
 
-function setSlot(matchKey,index,data){
+function setSlot(matchKey,index,data,resultClass){
   const match=document.querySelector(`[data-match="${matchKey}"]`); if(!match)return;
   const slot=match.querySelectorAll('.slot')[index]; if(!slot)return;
-  slot.querySelector('.slot-team').textContent=data?.team||'TBD';
+  const teamEl=slot.querySelector('.slot-team');
+  const name=data?.team||'TBD';
+  teamEl.textContent=name;
+  // Long names would otherwise overlap the score; compress to fit instead of resizing the box.
+  if(name.length>13){teamEl.setAttribute('textLength','86');teamEl.setAttribute('lengthAdjust','spacingAndGlyphs');}
+  else{teamEl.removeAttribute('textLength');teamEl.removeAttribute('lengthAdjust');}
   slot.querySelector('.slot-score').textContent=Number.isFinite(data?.score)?data.score:'—';
+  slot.classList.remove('winner','loser');
+  if(resultClass) slot.classList.add(resultClass);
 }
 
 // Winner/loser of a single {home:{team,score},away:{team,score}} match, or nulls if not yet decided.
@@ -112,8 +119,10 @@ async function load(){
   document.getElementById('meta').textContent=`ROUND ${d.round ?? '—'} · ${String(d.phase||'regular').toUpperCase()}`;
   const bracket=buildBracket(matches);
   for(const key of ['sf1','sf2','pf1','pf2','gf']){
-    setSlot(key,0,bracket[key].home);
-    setSlot(key,1,bracket[key].away);
+    const decided=outcome(bracket[key]);
+    const classFor=team=>decided.winner ? (decided.winner.team===team?.team?'winner':'loser') : null;
+    setSlot(key,0,bracket[key].home,classFor(bracket[key].home));
+    setSlot(key,1,bracket[key].away,classFor(bracket[key].away));
   }
 }
 
