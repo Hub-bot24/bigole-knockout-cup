@@ -1,9 +1,9 @@
 {
   "phase": "finals",
-  "round": 23,
+  "round": 25,
   "roundsUntilFinals": 0,
   "excludedCoach": "Tim",
-  "updatedAt": "2026-08-05T00:00:00+10:00",
+  "updatedAt": "2026-08-12T00:00:00+10:00",
   "sourceStatus": "manual_snapshot",
   "standings": [
     {
@@ -18,60 +18,60 @@
       "coach": "Joel",
       "leaguePoints": 34,
       "totalPoints": 29537,
-      "roundScore": 1605
+      "roundScore": 1227
     },
     {
       "team": "Multch’s Magoo’s",
       "coach": "Mitch",
       "leaguePoints": 34,
       "totalPoints": 28982,
-      "roundScore": 1643
+      "roundScore": 1203
     },
     {
       "team": "Ballbags",
       "coach": "Hayden",
       "leaguePoints": 34,
       "totalPoints": 28303,
-      "roundScore": 1555
+      "roundScore": 1064
     },
     {
       "team": "The amateurs",
       "coach": "Jhai",
       "leaguePoints": 28,
       "totalPoints": 28456,
-      "roundScore": 1735
+      "roundScore": 1100
     },
     {
       "team": "I love Herbie",
       "coach": "Blake",
       "leaguePoints": 30,
       "totalPoints": 27805,
-      "roundScore": 1572
+      "roundScore": 1231
     },
     {
       "team": "Bonogin Brawlers",
       "coach": "Matt",
       "leaguePoints": 28,
       "totalPoints": 27661,
-      "roundScore": 1665
+      "roundScore": 1199
     },
     {
       "team": "BARRY",
       "coach": "Kyle",
       "leaguePoints": 24,
       "totalPoints": 28107,
-      "roundScore": 1540
+      "roundScore": 1260
     },
     {
       "team": "Bridgette",
       "coach": "Bridgette",
       "leaguePoints": 26,
       "totalPoints": 27667,
-      "roundScore": 1661
+      "roundScore": 1156
     }
   ],
   "finals": {
-    "week": 0,
+    "week": 3,
     "matches": {
       "qf1": {
         "status": "FINAL",
@@ -118,21 +118,21 @@
         }
       },
       "sf1": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
-          "score": null
+          "score": 1231
         },
         "away": {
-          "score": null
+          "score": 1100
         }
       },
       "sf2": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
-          "score": null
+          "score": 1199
         },
         "away": {
-          "score": null
+          "score": 1203
         }
       },
       "pf1": {
