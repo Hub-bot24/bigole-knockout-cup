@@ -1,9 +1,9 @@
 {
   "phase": "finals",
-  "round": 25,
+  "round": 26,
   "roundsUntilFinals": 0,
   "excludedCoach": "Tim",
-  "updatedAt": "2026-08-12T00:00:00+10:00",
+  "updatedAt": "2026-08-19T00:00:00+10:00",
   "sourceStatus": "manual_snapshot",
   "standings": [
     {
@@ -18,21 +18,21 @@
       "coach": "Joel",
       "leaguePoints": 34,
       "totalPoints": 29537,
-      "roundScore": 1227
+      "roundScore": 1392
     },
     {
       "team": "Multch’s Magoo’s",
       "coach": "Mitch",
       "leaguePoints": 34,
       "totalPoints": 28982,
-      "roundScore": 1203
+      "roundScore": 1306
     },
     {
       "team": "Ballbags",
       "coach": "Hayden",
       "leaguePoints": 34,
       "totalPoints": 28303,
-      "roundScore": 1064
+      "roundScore": 1375
     },
     {
       "team": "The amateurs",
@@ -46,7 +46,7 @@
       "coach": "Blake",
       "leaguePoints": 30,
       "totalPoints": 27805,
-      "roundScore": 1231
+      "roundScore": 1559
     },
     {
       "team": "Bonogin Brawlers",
@@ -71,7 +71,7 @@
     }
   ],
   "finals": {
-    "week": 3,
+    "week": 4,
     "matches": {
       "qf1": {
         "status": "FINAL",
@@ -136,21 +136,21 @@
         }
       },
       "pf1": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
-          "score": null
+          "score": 1392
         },
         "away": {
-          "score": null
+          "score": 1306
         }
       },
       "pf2": {
-        "status": "WAITING",
+        "status": "FINAL",
         "home": {
-          "score": null
+          "score": 1559
         },
         "away": {
-          "score": null
+          "score": 1375
         }
       },
       "gf": {
